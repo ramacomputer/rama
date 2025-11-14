@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Admission Form</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="form.js" defer></script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Online Admission Form</h2>
+    <form id="admissionForm">
+      <label>Full Name:</label>
+      <input type="text" id="name" required>
+      <label>Father's Name:</label>
+      <input type="text" id="father" required>
+      <label>Mother's Name:</label>
+      <input type="text" id="mother" required>
+      <label>Date of Birth:</label>
+      <input type="date" id="dob" required>
+      <label>Mobile Number:</label>
+      <input type="tel" id="mobile" required>
+      <label>Email:</label>
+      <input type="email" id="email" required>
+      <label>Address:</label>
+      <textarea id="address" required></textarea>
+      <label>Course Applying For:</label>
+      <select id="course" required>
+        <option value="">-- Select Course --</option>
+        <option>DCA</option>
+        <option>ADCA</option>
+        <option>CCC</option>
+        <option>Tally</option>
+        <option>O Level</option>
+      </select>
+      <button type="submit" class="submit-btn">Submit Admission</button>
+    </form>
+  </div>
+</body>
+</html>

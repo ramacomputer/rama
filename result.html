@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institute Result Portal</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2193b0, #6dd5ed);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      width: 400px;
+      text-align: center;
+    }
+    h1 {
+      color: #0077b6;
+      margin-bottom: 15px;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #0077b6;
+      border-radius: 10px;
+      outline: none;
+      font-size: 16px;
+    }
+    button {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button:hover { background: #023e8a; }
+    .result-card {
+      margin-top: 20px;
+      background: #f1faff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      display: none;
+      text-align: left;
+    }
+    .result-card h3 { text-align: center; color: #0077b6; }
+    .row { display: flex; justify-content: space-between; padding: 6px 0; }
+    .status {
+      text-align: center;
+      font-weight: bold;
+      padding: 8px;
+      border-radius: 8px;
+      color: #fff;
+      margin-top: 10px;
+    }
+    .pass { background: #28a745; }
+    .fail { background: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Institute Result Portal</h1>
+    <p>अपना Roll Number डालें 👇</p>
+
+    <input type="text" id="rollInput" placeholder="Enter Roll Number">
+    <br>
+    <button onclick="fetchResult()">Check Result</button>
+
+    <div class="result-card" id="resultCard">
+      <h3>Student Result</h3>
+      <div class="row"><b>Name:</b> <span id="name"></span></div>
+      <div class="row"><b>Course:</b> <span id="course"></span></div>
+      <div class="row"><b>Roll No:</b> <span id="roll"></span></div>
+      <div class="row"><b>Total Marks:</b> <span id="marks"></span></div>
+      <div class="row"><b>Grade:</b> <span id="grade"></span></div>
+      <div class="status" id="status"></div>
+    </div>
+  </div>
+
+  <script>
+    function fetchResult() {
+      const roll = document.getElementById("rollInput").value.trim();
+      if (roll === "") {
+        alert("कृपया Roll Number डालें!");
+        return;
+      }
+
+      fetch(`fetch_result.php?roll=${roll}`)
+        .then(res => res.json())
+        .then(data => {
+          const card = document.getElementById("resultCard");
+          if (data.error) {
+            alert("❌ Invalid Roll Number!");
+            card.style.display = "none";
+          } else {
+            document.getElementById("name").innerText = data.name;
+            document.getElementById("course").innerText = data.course;
+            document.getElementById("roll").innerText = data.roll_no;
+            document.getElementById("marks").innerText = data.marks + " / 100";
+            document.getElementById("grade").innerText = data.grade;
+            const statusEl = document.getElementById("status");
+            statusEl.innerText = data.status;
+            statusEl.className = "status " + (data.status === "Pass" ? "pass" : "fail");
+            card.style.display = "block";
+          }
+        })
+        .catch(err => {
+          alert("⚠️ Server Error!");
+          console.error(err);
+        });
+    }
+  </script>
+</body>
+</html>

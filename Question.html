@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Computer Objective Questions</title>
+    <link rel="icon" href="img/RTDC_LOGO.png" type="image/svg+xml">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .question { margin-bottom: 20px; }
+        .options label { display: block; margin-bottom: 8px; }
+        .navigation { margin-top: 20px; }
+        .result { margin-top: 30px; }
+        .correct { color: green; }
+        .wrong { color: red; }
+        .disabled { opacity: 0.6; pointer-events: none; }
+        body, h2, .question, .navigation, #resultContainer, #quizForm {
+            text-align: center;
+        }
+        .options {
+            display: inline-block;
+            text-align: left;
+        }
+        /* Style Back, Next, and Submit buttons with different colors and increased font size */
+        #prevBtn {
+            background-color: #f39c12;
+            color: #fff;
+            font-size: 15px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        #nextBtn {
+            background-color: #3498db;
+            color: #fff;
+            font-size: 15px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        #submitBtn {
+            background-color: #27ae60;
+            color: #fff;
+            font-size: 15px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #prevBtn:disabled,
+        #nextBtn:disabled,
+        #submitBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #007bff;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1em;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-btn {
+            background: #fff;
+            color: #007bff;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 0.5em;
+        }
+        .login-btn:hover {
+            background: #e0e0e0;
+        }
+        .container {
+            padding: 2em;
+            text-align: center;
+        }
+        .login-buttons {
+            display: flex;
+            gap: 0.5em;
+        }
+    </style>
+</head>
+<body>
+     <nav>
+        <div class="nav-links">
+            <a href="index.html"><i class="bi bi-house-fill"></i> Home</a>
+            <a href="about.html"><i class="bi bi-file-person"></i> About Us</a>
+            <a href="Course.html"> <i class="bi bi-book"></i> Our Courses</a>
+            <a href="contact.html"> <i class="bi bi-person-lines-fill"></i> Contact Us</a>
+            <a href="Test.html"> <i class="bi bi-person-lines-fill"></i> Online Test</a>
+             <span class="nav-links" style="color: white; font-weight: 700;"><i class="bi bi-telephone"></i> +91 9118825965, +91 9026495898</span>
+        </div>
+        <div class="login-buttons">
+            <a href="login.html"><button class="login-btn">Faculty Login</button></a>
+             <a href="page.html"><button class="login-btn">New Registration</button></a>
+            <a href="Student.html"><button class="login-btn">Student Login</button></a>
+        </div>
+    </nav>
+    <h2>Computer Objective Questions</h2>
+    <form id="quizForm">
+        <div id="questionContainer"></div>
+        <div class="navigation">
+            <button type="button" id="prevBtn">Back</button>
+            <button type="button" id="nextBtn">Next</button>
+            <button type="button" id="submitBtn" disabled>Submit</button>
+        </div>
+    </form>
+    <div id="resultContainer"></div>
+
+    <script>
+        // Sample 25 questions
+        const questions = [
+            {
+                question: "What does CPU stand for?",
+                options: ["Central Processing Unit", "Computer Personal Unit", "Central Performance Unit", "Control Processing Unit"],
+                answer: 0
+            },
+            {
+                question: "Which device is used to input data into a computer?",
+                options: ["Monitor", "Keyboard", "Printer", "Speaker"],
+                answer: 1
+            },
+            {
+                question: "Which of the following is an example of software?",
+                options: ["Mouse", "Windows OS", "RAM", "Hard Disk"],
+                answer: 1
+            },
+            {
+                question: "What is the full form of RAM?",
+                options: ["Random Access Memory", "Read Access Memory", "Run Access Memory", "Rapid Access Memory"],
+                answer: 0
+            },
+            {
+                question: "Which is the brain of the computer?",
+                options: ["Monitor", "CPU", "Keyboard", "Mouse"],
+                answer: 1
+            },
+            {
+                question: "Which of the following is not an input device?",
+                options: ["Scanner", "Printer", "Keyboard", "Mouse"],
+                answer: 1
+            },
+            {
+                question: "Which language is used to create web pages?",
+                options: ["HTML", "C++", "Python", "Java"],
+                answer: 0
+            },
+            {
+                question: "Which is a permanent storage device?",
+                options: ["RAM", "ROM", "Cache", "Register"],
+                answer: 1
+            },
+            {
+                question: "What does GUI stand for?",
+                options: ["Graphical User Interface", "General User Interface", "Global User Interface", "Graphical Universal Interface"],
+                answer: 0
+            },
+            {
+                question: "Which is not a programming language?",
+                options: ["Java", "Python", "MS Word", "C#"],
+                answer: 2
+            },
+            {
+                question: "Which device displays the output?",
+                options: ["Monitor", "Keyboard", "Mouse", "Microphone"],
+                answer: 0
+            },
+            {
+                question: "Which is used to store data permanently?",
+                options: ["RAM", "Hard Disk", "Cache", "Register"],
+                answer: 1
+            },
+            {
+                question: "Which is an example of an operating system?",
+                options: ["Windows", "MS Excel", "Google Chrome", "RAM"],
+                answer: 0
+            },
+            {
+                question: "Which is not a hardware?",
+                options: ["Monitor", "Mouse", "Windows OS", "Printer"],
+                answer: 2
+            },
+            {
+                question: "What is the full form of URL?",
+                options: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Reference Locator", "Universal Reference Locator"],
+                answer: 0
+            },
+            {
+                question: "Which is used to connect computers in a network?",
+                options: ["Router", "Monitor", "Keyboard", "Printer"],
+                answer: 0
+            },
+            {
+                question: "Which is not a storage device?",
+                options: ["Hard Disk", "CD", "Mouse", "Pen Drive"],
+                answer: 2
+            },
+            {
+                question: "Which is used for printing?",
+                options: ["Monitor", "Printer", "Keyboard", "Mouse"],
+                answer: 1
+            },
+            {
+                question: "Which is not an output device?",
+                options: ["Monitor", "Printer", "Speaker", "Keyboard"],
+                answer: 3
+            },
+            {
+                question: "Which is used to write programs?",
+                options: ["Compiler", "Mouse", "Monitor", "Speaker"],
+                answer: 0
+            },
+            {
+                question: "Which is the fastest memory?",
+                options: ["Cache", "RAM", "Hard Disk", "CD"],
+                answer: 0
+            },
+            {
+                question: "Which is not a computer virus?",
+                options: ["Trojan", "Worm", "Excel", "Spyware"],
+                answer: 2
+            },
+            {
+                question: "Which is used to browse the internet?",
+                options: ["Browser", "Compiler", "Printer", "Monitor"],
+                answer: 0
+            },
+            {
+                question: "Which is not a web browser?",
+                options: ["Chrome", "Firefox", "MS Word", "Edge"],
+                answer: 2
+            },
+            {
+                question: "Which is used to store backup data?",
+                options: ["Pen Drive", "Monitor", "Keyboard", "Mouse"],
+                answer: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = Array(questions.length).fill(null);
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            let html = `<div class="question"><strong>Q${currentQuestion + 1}. ${q.question}</strong></div>`;
+            html += `<div class="options">`;
+            q.options.forEach((opt, idx) => {
+                html += `
+                    <label>
+                        <input type="radio" name="option" value="${idx}" ${userAnswers[currentQuestion] === idx ? 'checked' : ''}>
+                        ${opt}
+                    </label>
+                `;
+            });
+            html += `</div>`;
+            document.getElementById('questionContainer').innerHTML = html;
+
+            // Enable/disable navigation buttons
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').disabled = currentQuestion === questions.length - 1;
+
+            // Check if all questions are answered
+            const allAnswered = userAnswers.every(ans => ans !== null);
+            document.getElementById('submitBtn').disabled = !allAnswered;
+        }
+
+        // Save answer when selected
+        document.getElementById('questionContainer').addEventListener('change', function(e) {
+            if (e.target.name === 'option') {
+                userAnswers[currentQuestion] = parseInt(e.target.value);
+                // Check if all questions are answered
+                const allAnswered = userAnswers.every(ans => ans !== null);
+                document.getElementById('submitBtn').disabled = !allAnswered;
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            }
+        });
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            let score = 0;
+            let resultHtml = `<h3>Result</h3><ul>`;
+            questions.forEach((q, idx) => {
+                const isCorrect = userAnswers[idx] === q.answer;
+                if (isCorrect) score++;
+                resultHtml += `<li>
+                    <strong>Q${idx + 1}:</strong> ${q.question}<br>
+                    Your answer: <span class="${isCorrect ? 'correct' : 'wrong'}">${q.options[userAnswers[idx]] || 'No answer'}</span>
+                    ${isCorrect ? '<span class="correct">✔ Correct</span>' : `<span class="wrong">✘ Wrong</span> (Correct: ${q.options[q.answer]})`}
+                </li>`;
+            });
+            resultHtml += `</ul><h4>Your Score: ${score} / ${questions.length}</h4>`;
+            document.getElementById('resultContainer').innerHTML = resultHtml;
+            document.getElementById('quizForm').classList.add('disabled');
+        });
+
+        // Initial render
+        renderQuestion();
+    </script>
+      <footer style="background: #222; color: #fff; padding: 40px 0 20px 0; margin-top: 40px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <h4>RAMA TECHNICAL DEGREE COLLEGE</h4>
+          <p>
+            Registered under Society Act 21, 1860 of U.P Govt.<br>
+            Copyrights by Indian Government.<br>
+            QMS ISO 9001-2015 Certified.
+          </p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h5>Contact Us</h5>
+          <p>
+            <i class="bi bi-geo-alt"></i> Near Naurangiya Chauraha, Padrauna Road, Kushinagar, Uttar Pradesh, India<br>
+            <i class="bi bi-telephone"></i> +91 9118825965, +91 9026495898<br>
+            <i class="bi bi-envelope"></i> pappu012023@gmail.com
+          </p>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'});" class="btn btn-light" style="color: #222; font-weight: bold;">
+          <i class="bi bi-arrow-up-circle"></i> Top
+        </button>
+      </div>
+      <div class="text-center mt-3" style="font-size: 0.95em;">
+        &copy; 2024 RAMA TECHNICAL DEGREE COLLEGE. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

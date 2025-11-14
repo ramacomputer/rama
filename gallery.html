@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Computer Institute</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6fa;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0078ff, #00bfff);
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+    }
+
+    /* ===== Slideshow ===== */
+    .slideshow {
+      width: 100%;
+      max-height: 450px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slideshow img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      display: none;
+      border-bottom: 5px solid #0078ff;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slideshow img.active {
+      display: block;
+    }
+
+    /* ===== Gallery Grid ===== */
+    .gallery-section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px;
+    }
+
+    .gallery-title {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #0078ff;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+
+    /* ===== Video Section ===== */
+    .video-gallery {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 40px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    iframe, video {
+      width: 100%;
+      height: 250px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* ===== Lightbox ===== */
+    .lightbox {
+      position: fixed;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 999;
+    }
+
+    .lightbox img {
+      width: 90%;
+      max-width: 800px;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Our Institute Gallery</h1>
+    <p>Training | Practical Labs | Events | Students</p>
+  </header>
+
+  <!-- ===== Auto Slideshow ===== -->
+  <div class="slideshow">
+    <img src="computer_lab.jpg" class="active" alt="Computer Lab">
+    <img src="class.jpg" alt="Classroom">
+    <img src="work.jpg" alt="Students Working">
+    <img src="work girl.jpg" alt="Project Work">
+  </div>
+
+  <!-- ===== Image Gallery ===== -->
+  <section class="gallery-section">
+    <div class="gallery-title">Photo Gallery</div>
+    <div class="gallery-container">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=800&q=60" alt="Lab">
+        <div class="overlay">Computer Lab</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=800&q=60" alt="Class">
+        <div class="overlay">Classroom</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=60" alt="Workshop">
+        <div class="overlay">Workshop</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60" alt="Team Work">
+        <div class="overlay">Team Work</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=60" alt="Event">
+        <div class="overlay">Event</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=800&q=60" alt="Certificate">
+        <div class="overlay">Certificate Distribution</div>
+        
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=60" alt="Event">
+        <div class="overlay">Event</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=800&q=60" alt="Certificate">
+        <div class="overlay">Certificate Distribution</div>
+    </div>
+  </section>
+
+  <!-- ===== Video Gallery ===== -->
+  <section class="video-gallery">
+    <div class="gallery-title">Video Gallery</div>
+    <div class="video-grid">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/3b6ElaqAM2Q?si=St15Odeb5kssAaBp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/DMotiD8Epjg?si=gNWQuyxJzkKP5aiT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <video controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- ===== Lightbox ===== -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="">
+  </div>
+
+  <script>
+    // ===== Lightbox Script =====
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    galleryItems.forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target !== lightboxImg) closeLightbox();
+    });
+
+    // ===== Auto Slideshow =====
+    const slides = document.querySelectorAll('.slideshow img');
+    let currentSlide = 0;
+
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 3000);
+  </script>
+</body>
+</html>

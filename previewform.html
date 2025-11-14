@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Preview</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(120deg, #a09e9e, #af8c8c);
+        color: #fff;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    *{
+        color: black;
+    }
+    .container {
+        background: rgba(255,255,255,0.1);
+        padding: 25px 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        width: 90%;
+        max-width: 900px;
+    }
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .header img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+    }
+    .header h1 {
+        margin: 10px 0 0 0;
+        font-size: 24px;
+        text-transform: uppercase;
+    }
+    .header p {
+        margin: 0;
+        font-size: 14px;
+        color: #e0e0e0;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255,255,255,0.15);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    td {
+        padding: 8px 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    td:first-child {
+        font-weight: 600;
+        width: 35%;
+    }
+    .photo-box {
+        text-align: center;
+        margin-top: 15px;
+    }
+    .photo-box img {
+        width: 120px;
+        height: 140px;
+        border-radius: 10px;
+        border: 2px solid #fff;
+        object-fit: cover;
+    }
+    .buttons {
+        margin-top: 25px;
+        text-align: center;
+    }
+    button {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        margin: 5px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    button:hover {
+        transform: scale(1.05);
+        background: #43A047;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="RTDC_LOGO-removebg-preview.png" alt="Institute Logo">
+        <h1>Rama Technical Degree College</h1>
+        <p>Naurangiya Chauraha, Rajesh Mani School ke Samne</p>
+        <p>Contact: 9118825965 | 9026495898</p>
+    </div>
+
+    <h2 style="text-align:center; margin-bottom:15px;">🎓 Student Registration Preview</h2>
+    
+    <table id="previewTable"></table>
+
+    <div class="photo-box">
+        <img id="previewPhoto" alt="Student Photo">
+    </div>
+
+    <div class="buttons">
+        <button onclick="window.location.href='index.html'">Back to Form</button>
+        <button onclick="window.location.href='showdata.html'">Show All Data</button>
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", () => {
+    const student = JSON.parse(localStorage.getItem("previewData"));
+    if(!student){ 
+        document.body.innerHTML = "<h2>No Preview Data Found</h2>";
+        return;
+    }
+
+    const fields = {
+        "Srl No": student.srl,
+        "Registration No": student.regno,
+        "Student Name": student.name,
+        "Father's Name": student.father,
+        "Mother's Name": student.mother,
+        "Date of Birth": student.dob,
+        "Gender": student.gender,
+        "Marital Status": student.marital,
+        "Caste Category": student.caste,
+        "Address": student.address,
+        "Contact No": student.contact,
+        "WhatsApp No": student.whatsapp,
+        "Father Mobile No": student.fathermob,
+        "Email ID": student.email || "—",
+        "Qualification": student.qualification,
+        "Course": student.course,
+        "Total Fee": "₹ " + student.fee,
+        "Admission Date": student.admission,
+        "Batch Time": student.batch
+    };
+
+    const table = document.getElementById("previewTable");
+    table.innerHTML = Object.entries(fields)
+        .map(([key, val]) => `<tr><td>${key}</td><td>${val}</td></tr>`)
+        .join("");
+
+    if(student.photo){
+        document.getElementById("previewPhoto").src = student.photo;
+    }
+});
+</script>
+
+</body>
+</html>

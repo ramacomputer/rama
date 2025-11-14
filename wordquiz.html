@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Objective Test - 25 Questions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8ffae 0%, #43cea2 100%);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            animation: bgmove 10s infinite alternate;
+        }
+        @keyframes bgmove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(60,60,60,0.15);
+            padding: 32px 24px 24px 24px;
+            animation: fadein 1s;
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .question-num {
+            font-size: 1.2em;
+            color: #43cea2;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            color: #222;
+        }
+        .options label {
+            display: block;
+            background: #f1f1f1;
+            margin-bottom: 10px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 2px solid transparent;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        .options label.selected {
+            background: #43cea2;
+            color: #fff;
+            border-color: #43cea2;
+        }
+        .options label.correct {
+            background: #a8e063;
+            color: #222;
+            border-color: #43cea2;
+            font-weight: bold;
+        }
+        .options label.incorrect {
+            background: #ff6a6a;
+            color: #fff;
+            border-color: #e74c3c;
+            font-weight: bold;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            gap: 10px;
+        }
+        .controls button {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            background: #43cea2;
+            color: #fff;
+            transition: background 0.2s;
+            margin: 0 2px;
+        }
+        .controls button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .controls .mark-btn.marked {
+            background: #f9d423;
+            color: #222;
+        }
+        .timer {
+            text-align: right;
+            font-size: 1.1em;
+            color: #e67e22;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            animation: blink 1s step-end infinite alternate;
+        }
+        @keyframes blink {
+            0% { color: #e67e22; }
+            100% { color: #d35400; }
+        }
+        .question-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 18px 0 0 0;
+            justify-content: center;
+        }
+        .question-nav button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: #eee;
+            color: #222;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            outline: none;
+            font-size: 1em;
+            border: 2px solid transparent;
+        }
+        .question-nav button.current {
+            background: #43cea2;
+            color: #fff;
+            border-color: #43cea2;
+        }
+        .question-nav button.answered {
+            background: #a8e063;
+            color: #222;
+            border-color: #43cea2;
+        }
+        .question-nav button.marked {
+            background: #f9d423;
+            color: #222;
+            border-color: #f9d423;
+        }
+        .score-section {
+            text-align: center;
+            margin-top: 30px;
+            animation: fadein 1s;
+        }
+        .score-section h2 {
+            color: #43cea2;
+            margin-bottom: 10px;
+        }
+        .score-section .result-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .score-section .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f1f1f1;
+        }
+        .score-section .result-item.correct {
+            background: #a8e063;
+            color: #222;
+        }
+        .score-section .result-item.incorrect {
+            background: #ff6a6a;
+            color: #fff;
+        }
+        @media (max-width: 700px) {
+            .container { max-width: 98vw; padding: 12px 2vw 18px 2vw;}
+            .question-nav button { width: 28px; height: 28px; font-size: 0.95em;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <div class="timer" id="timer">40:00</div>
+        <div class="question-nav" id="question-nav"></div>
+        <div id="quiz-section">
+            <div class="question-num" id="question-num"></div>
+            <div class="question-text" id="question-text"></div>
+            <div class="options" id="options"></div>
+            <div class="controls">
+                <button id="prev-btn">Previous</button>
+                <button id="mark-btn" class="mark-btn">Mark for Later</button>
+                <button id="next-btn">Next</button>
+                <button id="submit-btn" style="background:#e67e22;">Submit</button>
+            </div>
+        </div>
+        <div id="score-section" class="score-section" style="display:none;"></div>
+    </div>
+    <script>
+        // 25 sample questions (replace with your own)
+        const questions = [
+            {
+                question: "माइक्रोसॉफ्ट वर्ड सॉफ्टवेयर क्या है?",
+                options: ["एक वेब ब्राउज़र", "एक वर्ड प्रोसेसिंग प्रोग्राम", "एक वीडियो एडिटिंग सॉफ्टवेयर", "एक स्प्रेडशीट प्रोग्राम"],
+                answer: 1
+            },
+            {
+                question: "माइक्रोसॉफ्ट वर्ड का आविष्कार किसने किया?",
+                options: ["चार्ल्स सिमोनी", "पॉल एलन", "स्टीव जॉब्स", "बिल गेट्स"],
+                answer: 0
+            },
+            {
+                question: "वर्ड डॉक्यूमेंट के लिए डिफ़ॉल्ट फ़ाइल एक्सटेंशन क्या है?",
+                options: [".pdf", ".docx", ".xls", ".txt"],
+                answer: 1
+            },
+            {
+                question: "एमएस वर्ड की विशेषताएं क्या हैं?",
+                options: ["फ़ाइल संपीड़न और एन्क्रिप्शन", "वीडियो संपादन, ध्वनि मिश्रण और एनीमेशन", "स्प्रेडशीट गणना और डेटा विश्लेषण", "टेक्स्ट स्वरूपण, वर्तनी जांच और टेम्पलेट्स"],
+                answer: 3
+            },
+            {
+                question: "क्या मैं एमएस वर्ड मुफ्त में डाउनलोड कर सकता हूँ?",
+                options: ["नहीं, यह केवल एक सशुल्क सॉफ्टवेयर है", "हाँ, किसी तृतीय-पक्ष वेबसाइट के माध्यम से", "हाँ, लेकिन केवल एक सीमित परीक्षण संस्करण उपलब्ध है", "हाँ, एमएस वर्ड हमेशा मुफ्त डाउनलोड के लिए उपलब्ध है"],
+                answer: 2
+            },
+            {
+                question: "एमएस वर्ड में फॉन्ट और पैराग्राफ फॉर्मेटिंग बदलने के विकल्प किस टैब में होते हैं?",
+                options: ["इन्सर्ट", "रिव्यू", "व्यू", "होम"],
+                answer: 3
+            },
+            {
+                question: "आप माइक्रोसॉफ्ट वर्ड में डॉक्यूमेंट कैसे सेव करते हैं?",
+                options: ["Ctrl + S", "Ctrl + P", "Ctrl + F", "Ctrl + A"],
+                answer: 0
+            },
+            {
+                question: "पेज लेआउट टैब आपको क्या समायोजित करने की अनुमति देता है?",
+                options: ["हाइपरलिंक्स सम्मिलित करना", "टेक्स्ट का रंग", "फ़ॉन्ट और पैराग्राफ", "मार्जिन, ओरिएंटेशन और आकार"],
+                answer: 3
+            },
+            {
+                question: "माइक्रोसॉफ्ट वर्ड में नया डॉक्यूमेंट खोलने के लिए किस शॉर्टकट कुंजी का उपयोग किया जाता है?",
+                options: ["Ctrl + S", "Ctrl + N", "Ctrl + P", "Ctrl + O"],
+                answer: 1
+            },
+            {
+                question: "आप वर्ड में चयनित टेक्स्ट पर बोल्ड फ़ॉर्मेटिंग कैसे लागू करते हैं?",
+                options: ["Ctrl + U", "Ctrl + N", "Ctrl + B", "Ctrl + P"],
+                answer: 2
+            },
+            {
+                question: "एमएस वर्ड में कौन सी सुविधा आपको सामान्य वर्तनी की गलतियों को स्वचालित रूप से ठीक करने में मदद करती है?",
+                options: ["ऑटोकरेक्ट", "थिसॉरस", "शब्द गणना", "व्याकरण जाँच"],
+                answer: 0
+            },
+            {
+                question: "आप वर्ड डॉक्यूमेंट में पेज ब्रेक कैसे डाल सकते हैं?",
+                options: ["Ctrl + P", "Ctrl + Enter", "Ctrl + A", "Ctrl + S"],
+                answer: 1
+            },
+            {
+                question: "एमएस वर्ड में टेक्स्ट कॉपी करने की शॉर्टकट कुंजी क्या है?",
+                options: ["Ctrl + Z", "Ctrl + X", "Ctrl + V", "Ctrl + C"],
+                answer: 3
+            },
+            {
+                question: "एमएस वर्ड में टेक्स्ट पेस्ट करने के लिए निम्नलिखित में से किस कीबोर्ड शॉर्टकट का उपयोग किया जाता है ?",
+                options: ["Ctrl + Z", "Ctrl + N", "Ctrl + V", "Ctrl + C "],
+                answer: 2
+            },
+            {
+                question: "निम्नलिखित में से कौन सा एमएस वर्ड में टेक्स्ट अलाइनमेंट विकल्प नहीं है?",
+                options: ["केंद्र", "दायां", "बायां", "नीचे"],
+                answer: 3
+            },
+            {
+                question: "कौन सा विकल्प आपको दस्तावेज़ में वॉटरमार्क जोड़ने की अनुमति देता है?",
+                options: ["इन्सर्ट -> हेडर", "डिज़ाइन -> वॉटरमार्क", "रिव्यू -> वॉटरमार्क", "पेज लेआउट -> वॉटरमार्क"],
+                answer: 1
+            },
+            {
+                question: "एमएस वर्ड में विषय-सूची बनाने के लिए निम्नलिखित में से किसका उपयोग किया जाता है?",
+                options: ["इन्सर्ट → विषय-सूची", "होम → टेबल", "संदर्भ → विषय-सूची", "व्यू → विषय-सूची"],
+                answer: 2
+            },
+            {
+                question: "एमएस वर्ड मेल मर्ज क्या है?",
+                options: ["मेलिंग लेबल, लिफाफे और फॉर्म लेटर बनाने के लिए उपयोग की जाने वाली सुविधा", "एकाधिक वर्ड दस्तावेज़ों को एक में संयोजित करने की सुविधा", "एक सुविधा जो विभिन्न फ़ाइल स्वरूपों को एक में मर्ज करती है", "एक समूह को व्यक्तिगत ईमेल भेजने के लिए उपयोग की जाने वाली सुविधा"],
+                answer: 0
+            },
+            {
+                question: "आप एमएस वर्ड में किसी दस्तावेज़ के मार्जिन कैसे बदल सकते हैं?",
+                options: ["होम -> मार्जिन", "लेआउट -> मार्जिन", "इन्सर्ट -> मार्जिन", "पेज लेआउट -> मार्जिन"],
+                answer: 3
+            },
+            {
+                question: "एमएस वर्ड में हेडर जोड़ने के लिए निम्नलिखित में से किस विकल्प का उपयोग किया जाता है?",
+                options: ["इन्सर्ट -> हेडर", "व्यू -> हेडर", "होम -> हेडर", "पेज लेआउट -> हेडर"],
+                answer: 0
+            },
+            {
+                question: "एमएस वर्ड में मार्क एंट्री क्या है?",
+                options: ["दस्तावेज़ में टेक्स्ट को हाइलाइट करने के लिए एक सुविधा", "दस्तावेज़ में एक इंडेक्स बनाने के लिए उपयोग की जाने वाली सुविधा", "दस्तावेज़ में टिप्पणियां डालने के लिए एक सुविधा", "दस्तावेज़ में टेक्स्ट बॉक्स जोड़ने के लिए एक सुविधा"],
+                answer: 1
+            },
+            {
+                question: "एमएस वर्ड में निम्नलिखित में से कौन सी डिफ़ॉल्ट लाइन स्पेसिंग है?",
+                options: ["सिंगल", "डबल", "1.5 लाइन", "1.15 लाइन"],
+                answer: 3
+            },
+            {
+                question: "आप अपने कंप्यूटर से वर्ड डॉक्यूमेंट में चित्र कैसे डाल सकते हैं ?",
+                options: ["होम -> चित्र", "इन्सर्ट -> चित्र", "पेज लेआउट -> चित्र", "व्यू -> चित्र"],
+                answer: 1
+            },
+            {
+                question: "एमएस वर्ड में 'चेंज केस' का क्या कार्य है?",
+                options: ["लाइन स्पेसिंग को समायोजित करने के लिए", "टेक्स्ट को अपरकेस या लोअरकेस में बदलने के लिए", "पेज ओरिएंटेशन बदलने के लिए", "फॉन्ट स्टाइल बदलने के लिए"],
+                answer: 1
+            },
+            {
+                question: "एमएस वर्ड में 'Ctrl + Z' शॉर्टकट का क्या कार्य है?",
+                options: ["दस्तावेज़ को बंद करने के लिए", "किसी क्रिया को दोबारा करने के लिए", "किसी क्रिया को पूर्ववत करने के लिए", "किसी दस्तावेज़ को सहेजने के लिए"],
+                answer: 2
+            }
+        ];
+
+        // State
+        let currentQuestion = 0;
+        let answers = Array(questions.length).fill(null); // user's selected option index
+        let marked = Array(questions.length).fill(false); // marked for later
+        let submitted = false;
+        let timer = 40 * 60; // 40 minutes in seconds
+        let timerInterval = null;
+
+        // Elements
+        const questionNumEl = document.getElementById('question-num');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsEl = document.getElementById('options');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const markBtn = document.getElementById('mark-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const timerEl = document.getElementById('timer');
+        const questionNavEl = document.getElementById('question-nav');
+        const quizSection = document.getElementById('quiz-section');
+        const scoreSection = document.getElementById('score-section');
+
+        function pad(n) { return n < 10 ? '0' + n : n; }
+
+        function updateTimer() {
+            let min = Math.floor(timer / 60);
+            let sec = timer % 60;
+            timerEl.textContent = `${pad(min)}:${pad(sec)}`;
+            if (timer <= 0) {
+                clearInterval(timerInterval);
+                submitQuiz();
+            }
+            timer--;
+        }
+
+        function renderQuestionNav() {
+            questionNavEl.innerHTML = '';
+            for (let i = 0; i < questions.length; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i + 1;
+                if (i === currentQuestion) btn.classList.add('current');
+                if (answers[i] !== null) btn.classList.add('answered');
+                if (marked[i]) btn.classList.add('marked');
+                btn.onclick = () => {
+                    currentQuestion = i;
+                    renderQuestion();
+                };
+                questionNavEl.appendChild(btn);
+            }
+        }
+
+        function renderQuestion() {
+            renderQuestionNav();
+            const q = questions[currentQuestion];
+            questionNumEl.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            questionTextEl.textContent = q.question;
+            optionsEl.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const label = document.createElement('label');
+                if (answers[currentQuestion] === idx) label.classList.add('selected');
+                label.innerHTML = `<input type="radio" name="option" value="${idx}" ${answers[currentQuestion] === idx ? 'checked' : ''}>${opt}`;
+                label.onclick = () => {
+                    answers[currentQuestion] = idx;
+                    renderQuestion();
+                };
+                optionsEl.appendChild(label);
+            });
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = currentQuestion === questions.length - 1;
+            markBtn.textContent = marked[currentQuestion] ? "Unmark" : "Mark for Later";
+            markBtn.classList.toggle('marked', marked[currentQuestion]);
+        }
+
+        prevBtn.onclick = () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        };
+        nextBtn.onclick = () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            }
+        };
+        markBtn.onclick = () => {
+            marked[currentQuestion] = !marked[currentQuestion];
+            renderQuestion();
+        };
+        submitBtn.onclick = () => {
+            if (confirm("Are you sure you want to submit the test?")) {
+                submitQuiz();
+            }
+        };
+
+        function submitQuiz() {
+            if (submitted) return;
+            submitted = true;
+            clearInterval(timerInterval);
+            quizSection.style.display = 'none';
+            questionNavEl.style.display = 'none';
+            timerEl.style.display = 'none';
+            // Calculate score
+            let score = 0;
+            let results = [];
+            for (let i = 0; i < questions.length; i++) {
+                const correct = questions[i].answer;
+                const userAns = answers[i];
+                if (userAns === correct) score++;
+                results.push({
+                    question: questions[i].question,
+                    options: questions[i].options,
+                    correct,
+                    userAns
+                });
+            }
+            // Show score and answers
+            let html = `<h2>Your Score: ${score} / ${questions.length}</h2>`;
+            html += `<div class="result-list">`;
+            results.forEach((res, idx) => {
+                let status = res.userAns === res.correct ? 'correct' : 'incorrect';
+                html += `<div class="result-item ${status}"><b>Q${idx+1}:</b> ${res.question}<br>`;
+                res.options.forEach((opt, i) => {
+                    let optStatus = '';
+                    if (i === res.correct) optStatus = ' <b style="color:#43cea2;">(Correct)</b>';
+                    if (i === res.userAns && res.userAns !== res.correct) optStatus = ' <b style="color:#e74c3c;">(Your Answer)</b>';
+                    if (i === res.userAns && res.userAns === res.correct) optStatus = ' <b style="color:#43cea2;">(Your Answer)</b>';
+                    html += `<div>${String.fromCharCode(65+i)}. ${opt}${optStatus}</div>`;
+                });
+                html += `</div>`;
+            });
+            html += `</div>`;
+            scoreSection.innerHTML = html;
+            scoreSection.style.display = '';
+        }
+
+        // Start
+        renderQuestion();
+        renderQuestionNav();
+        timerEl.textContent = "40:00";
+        timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>

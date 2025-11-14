@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institute Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 32px;
+      color: #007bff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #f0f0f0, #ffffff);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon {
+      font-size: 45px;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: #333;
+      font-size: 20px;
+      margin-top: 5px;
+    }
+
+    footer {
+      margin-top: 25px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Institute Management Dashboard</h1>
+    <div class="grid">
+
+      <div class="card" onclick="window.location.href='adminlogin.html'">
+        <div class="icon"><i class="fas fa-user-plus"></i></div>
+        <h3>New Registration</h3>
+      </div>
+
+      <div class="card" onclick="window.location.href='attendance.html'">
+        <div class="icon"><i class="fas fa-calendar-check"></i></div>
+        <h3>Attendance</h3>
+      </div>
+
+      <div class="card" onclick="window.location.href='enquiry.html'">
+        <div class="icon"><i class="fas fa-question-circle"></i></div>
+        <h3>Enquiry Entry</h3>
+      </div>
+
+      <div class="card" onclick="window.location.href='checkfee.html'">
+        <div class="icon"><i class="fas fa-search-dollar"></i></div>
+        <h3>Check Fee</h3>
+      </div>
+
+      <div class="card" onclick="window.location.href='postfee.html'">
+        <div class="icon"><i class="fas fa-rupee-sign"></i></div>
+        <h3>Post Fee</h3>
+      </div>
+
+      <div class="card" onclick="window.location.href='checkattendance.html'">
+        <div class="icon"><i class="fas fa-user-check"></i></div>
+        <h3>Check Attendance</h3>
+      </div>
+
+      <div class="card" onclick="window.location.href='placement.html'">
+        <div class="icon"><i class="fas fa-briefcase"></i></div>
+        <h3>Placement Add</h3>
+      </div>
+
+    </div>
+    <footer>© 2025 | Your Institute Name</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Admission Records</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Admission Records (Admin Panel)</h2>
+    <div class="filter-box">
+      <input type="text" id="searchInput" placeholder="Search by Name, Mobile, Email...">
+      <select id="courseFilter">
+        <option value="">All Courses</option>
+        <option>DCA</option>
+        <option>ADCA</option>
+        <option>CCC</option>
+        <option>Tally</option>
+        <option>O Level</option>
+      </select>
+    </div>
+    <table id="recordsTable">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Father's Name</th>
+          <th>Mother's Name</th>
+          <th>DOB</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Course</th>
+          <th>Submitted On</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="downloadBtn" class="submit-btn">Download CSV</button>
+  </div>
+</body>
+</html>

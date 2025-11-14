@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team - Rama Technical Computer Institute</title>
+  <link rel="icon" type="image/png" href="RTDC_LOGO.png"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f8ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      text-align: center;
+      padding: 50px 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.4em;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1.1em;
+      margin-top: 8px;
+    }
+
+    .team-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 50px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .team-member {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px 15px 25px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .team-member img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #007bff;
+      margin-bottom: 15px;
+      transition: transform 0.4s ease;
+    }
+
+    .team-member:hover img {
+      transform: scale(1.05);
+    }
+
+    .team-member h3 {
+      margin: 8px 0 5px;
+      color: #333;
+      font-size: 1.2em;
+    }
+
+    .team-member p {
+      margin: 3px 0;
+      color: #555;
+      font-size: 0.95em;
+    }
+
+    .social-icons {
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      text-decoration: none;
+      color: #007bff;
+      margin: 0 6px;
+      font-size: 1.2em;
+      transition: 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #00c6ff;
+      transform: scale(1.2);
+    }
+
+    footer {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+      font-size: 0.95em;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Meet Our Expert Team</h1>
+    <p>Rama Technical Computer Institute</p>
+  </header>
+
+  <section class="team-container">
+
+    <div class="team-member">
+      <img src="sir.jpg" alt="Pappu Kumar">
+      <h3>Pappu Sharma</h3>
+      <p><strong>Designation:</strong> Director</p>
+      <p><strong>Experience:</strong> 5+ Years</p>
+      <p><strong>Qualification:</strong> M.Sc (Computer Science)</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/r/19o1UoUo9S/"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/9118825965"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="images.jpeg" alt="Pooja Jaiswal">
+      <h3>Pooja Jaiswal</h3>
+      <p><strong>Designation:</strong> Faculty (Programming)</p>
+      <p><strong>Experience:</strong> 5 Years</p>
+      <p><strong>Qualification:</strong> BCA, MCA</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/9026495898"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="download.jpeg" alt="Rajesh Verma">
+      <h3>Rajesh Verma</h3>
+      <p><strong>Designation:</strong> Faculty (Graphic & Web Design)</p>
+      <p><strong>Experience:</strong> 6 Years</p>
+      <p><strong>Qualification:</strong> B.Tech (IT)</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="images (1).jpeg" alt="Anita Mishra">
+      <h3>Anita Mishra</h3>
+      <p><strong>Designation:</strong> Office Administrator</p>
+      <p><strong>Experience:</strong> 8 Years</p>
+      <p><strong>Qualification:</strong> B.Com, DCA</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="team-member">
+      <img src="images.jpeg" alt="Pooja Jaiswal">
+      <h3>Pooja Jaiswal</h3>
+      <p><strong>Designation:</strong> Faculty (Programming)</p>
+      <p><strong>Experience:</strong> 5 Years</p>
+      <p><strong>Qualification:</strong> BCA, MCA</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/9026495898"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="download.jpeg" alt="Rajesh Verma">
+      <h3>Rajesh Verma</h3>
+      <p><strong>Designation:</strong> Faculty (Graphic & Web Design)</p>
+      <p><strong>Experience:</strong> 6 Years</p>
+      <p><strong>Qualification:</strong> B.Tech (IT)</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="images (1).jpeg" alt="Anita Mishra">
+      <h3>Anita Mishra</h3>
+      <p><strong>Designation:</strong> Office Administrator</p>
+      <p><strong>Experience:</strong> 8 Years</p>
+      <p><strong>Qualification:</strong> B.Com, DCA</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="images (1).jpeg" alt="Anita Mishra">
+      <h3>Anita Mishra</h3>
+      <p><strong>Designation:</strong> Office Administrator</p>
+      <p><strong>Experience:</strong> 8 Years</p>
+      <p><strong>Qualification:</strong> B.Com, DCA</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>© 2025 Rama Technical Computer Institute | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

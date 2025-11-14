@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration</title>
+<style>
+    body {
+        background: linear-gradient(120deg, #90aec7, #e6749a);
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+    }
+    h2 { margin-bottom: 20px; text-align:center; }
+    form {
+        background: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 800px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    input, select, textarea, button {
+        width: 100%;
+        padding: 8px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 5px;
+    }
+    input, select, textarea {
+        background: rgba(255,255,255,0.9);
+        color: #000;
+    }
+    .buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .buttons button {
+        width: 150px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #fff;
+    }
+    .buttons button:hover {
+        transform: scale(1.05);
+    }
+    img {
+        width: 100px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: none;
+        margin-top: 10px;
+        border: 2px solid #fff;
+    }
+</style>
+</head>
+<body>
+
+<h2>🎓 Rama Technical Degree College - Student Registration</h2>
+<form id="registrationForm">
+    <label>Srl No:</label>
+    <input type="text" id="srl" readonly><br>
+
+    <label>Registration No:</label>
+    <input type="text" id="regno" readonly><br>
+
+    <label>Student Name:</label>
+    <input type="text" id="name" required><br>
+
+    <label>Father's Name:</label>
+    <input type="text" id="father" required><br>
+
+    <label>Mother's Name:</label>
+    <input type="text" id="mother" required><br>
+
+    <label>Date of Birth:</label>
+    <input type="date" id="dob" required><br>
+
+    <label>Gender:</label>
+    <select id="gender" required>
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select><br>
+
+    <label>Marital Status:</label>
+    <select id="marital">
+        <option>Single</option>
+        <option>Married</option>
+    </select><br>
+
+    <label>Caste Category:</label>
+    <select id="caste">
+        <option>General</option>
+        <option>OBC</option>
+        <option>SC</option>
+        <option>ST</option>
+    </select><br>
+
+    <label>Address:</label>
+    <textarea id="address"></textarea><br>
+
+    <label>Contact No:</label>
+    <input type="text" id="contact" required><br>
+
+    <label>WhatsApp No:</label>
+    <input type="text" id="whatsapp"><br>
+
+    <label>Father's Mobile No:</label>
+    <input type="text" id="fathermob"><br>
+
+    <label>Email ID (Optional):</label>
+    <input type="email" id="email"><br>
+
+    <label>Qualification:</label>
+    <select id="qualification">
+        <option>8th</option>
+        <option>10th</option>
+        <option>12th</option>
+        <option>Graduation</option>
+    </select><br>
+
+    <label>Course:</label>
+    <select id="course">
+        <option>OM</option>
+        <option>DFA</option>
+        <option>ADFA</option>
+        <option>DCA</option>
+        <option>ADCA</option>
+        <option>CCC</option>
+        <option>O LEVEL</option>
+        <option>DTP</option>
+        <option>OTHER</option>
+    </select><br>
+
+    <label>Total Fee:</label>
+    <input type="number" id="fee" required><br>
+
+    <label>Admission Date:</label>
+    <input type="date" id="admission" required><br>
+
+    <label>Batch Time:</label>
+    <select id="batch">
+        <option>Morning</option>
+        <option>Afternoon</option>
+        <option>Evening</option>
+    </select><br>
+
+    <label>Upload Photo:</label>
+    <input type="file" id="photo" accept="image/*"><br>
+    <img id="preview" alt="Preview">
+
+    <div class="buttons">
+        <button type="button" id="resetBtn" style="background:#E91E63;">Reset</button>
+        <button type="button" id="submitBtn" style="background:#4CAF50;">Submit</button>
+        <button type="button" id="updateBtn" style="background:#FFC107; display:none;">Update</button>
+        <button type="button" id="showBtn" style="background:#2196F3;">Show Data</button>
+    </div>
+</form>
+
+<script>
+let editIndex = null;
+
+function generateSerial() {
+    const data = JSON.parse(localStorage.getItem("students")) || [];
+    return data.length + 1;
+}
+function generateRegNo() {
+    const data = JSON.parse(localStorage.getItem("students")) || [];
+    return "NK" + (1000 + data.length + 1);
+}
+document.getElementById("srl").value = generateSerial();
+document.getElementById("regno").value = generateRegNo();
+
+document.getElementById("contact").addEventListener("input", function(){
+    document.getElementById("whatsapp").value = this.value;
+});
+
+document.getElementById("photo").addEventListener("change", function(e){
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function(){
+        const preview = document.getElementById("preview");
+        preview.src = reader.result;
+        preview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+});
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("registrationForm").reset();
+    document.getElementById("preview").style.display = "none";
+});
+
+document.getElementById("submitBtn").addEventListener("click", function(){
+    const data = JSON.parse(localStorage.getItem("students")) || [];
+    const student = getFormData();
+    data.push(student);
+    localStorage.setItem("students", JSON.stringify(data));
+    localStorage.setItem("previewData", JSON.stringify(student)); // preview ke liye
+    alert("✅ Registration Successful!");
+    window.location.href = "preview.html";
+});
+
+document.getElementById("updateBtn").addEventListener("click", function(){
+    const data = JSON.parse(localStorage.getItem("students")) || [];
+    data[editIndex] = getFormData();
+    localStorage.setItem("students", JSON.stringify(data));
+    alert("✅ Data Updated Successfully!");
+    document.getElementById("updateBtn").style.display = "none";
+    document.getElementById("submitBtn").style.display = "block";
+    window.location.href = "showdata.html";
+});
+
+function getFormData(){
+    return {
+        srl: document.getElementById("srl").value,
+        regno: document.getElementById("regno").value,
+        name: document.getElementById("name").value,
+        father: document.getElementById("father").value,
+        mother: document.getElementById("mother").value,
+        dob: document.getElementById("dob").value,
+        gender: document.getElementById("gender").value,
+        marital: document.getElementById("marital").value,
+        caste: document.getElementById("caste").value,
+        address: document.getElementById("address").value,
+        contact: document.getElementById("contact").value,
+        whatsapp: document.getElementById("whatsapp").value,
+        fathermob: document.getElementById("fathermob").value,
+        email: document.getElementById("email").value,
+        qualification: document.getElementById("qualification").value,
+        course: document.getElementById("course").value,
+        fee: document.getElementById("fee").value,
+        admission: document.getElementById("admission").value,
+        batch: document.getElementById("batch").value,
+        photo: document.getElementById("preview").src
+    };
+}
+
+document.getElementById("showBtn").addEventListener("click", function(){
+    window.location.href = "showdataform.html";
+});
+
+window.addEventListener("load", function(){
+    const editData = JSON.parse(localStorage.getItem("editStudent"));
+    if(editData){
+        editIndex = editData.index;
+        Object.keys(editData.data).forEach(key=>{
+            if(document.getElementById(key)) document.getElementById(key).value = editData.data[key];
+        });
+        if(editData.data.photo){
+            document.getElementById("preview").src = editData.data.photo;
+            document.getElementById("preview").style.display = "block";
+        }
+        document.getElementById("submitBtn").style.display = "none";
+        document.getElementById("updateBtn").style.display = "block";
+        localStorage.removeItem("editStudent");
+    }
+});
+</script>
+
+</body>
+</html>

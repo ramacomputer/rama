@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>ऑनलाइन टेस्ट निर्देश</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fffbe7;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            padding: 32px 28px 24px 28px;
+        }
+        h2 {
+            color: #ff6f61;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        ul {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .checkbox-section {
+            margin: 18px 0 24px 0;
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-section input[type="checkbox"] {
+            accent-color: #ff6f61;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .checkbox-section label {
+            font-size: 1.08em;
+            color: #444;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background: linear-gradient(90deg, #ff6f61 0%, #ffb88c 100%);
+            color: #fff;
+            font-size: 1.15em;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:disabled {
+            background: #ffd6cc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>ऑनलाइन टेस्ट के निर्देश</h2>
+        <ul>
+            <li>टेस्ट की कुल अवधि <b>40 मिनट</b> है।</li>
+            <li>हर प्रश्न के लिए <b>Next</b> और <b>Previous</b> बटन का उपयोग करें।</li>
+            <li>अगर आप किसी प्रश्न को बाद में हल करना चाहते हैं तो <b>Mark for Later</b> बटन दबाएँ।</li>
+            <li>टेस्ट पूरा होने के बाद <b>Submit</b> बटन दबाएँ।</li>
+            <li>समय समाप्त होने पर टेस्ट अपने आप सबमिट हो जाएगा।</li>
+            <li>सुनिश्चित करें कि सभी निर्देश ध्यानपूर्वक पढ़ें।</li>
+        </ul>
+        <div class="checkbox-section">
+            <input type="checkbox" id="readInstr" onchange="toggleButton()">
+            <label for="readInstr">मैंने ऊपर दिए गए सभी निर्देश पढ़ लिए हैं।</label>
+        </div>
+        <button class="btn" id="goQuizBtn" onclick="goToQuiz()" disabled>क्विज़ शुरू करें</button>
+    </div>
+    <script>
+        function toggleButton() {
+            document.getElementById('goQuizBtn').disabled = !document.getElementById('readInstr').checked;
+        }
+        function goToQuiz() {
+            // Replace 'quiz.html' with your quiz file name
+            window.location.href = 'ssss.html';
+        }
+    </script>
+</body>
+</html>

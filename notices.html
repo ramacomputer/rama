@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notice Board | Rama Computer Institute</title>
+  <link rel="icon" type="image/png" href="RTDC_LOGO.png"/>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: #f3f7ff;
+    }
+
+    header {
+      background: linear-gradient(45deg, #0056d2, #00b4ff);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2em;
+    }
+
+    header p {
+      margin: 5px 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+    }
+
+    .notice-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      border-bottom: 3px solid #0056d2;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+    }
+
+    .notice {
+      background: #f9fbff;
+      border-left: 6px solid #0056d2;
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .notice:hover {
+      background: #e8f1ff;
+      transform: scale(1.02);
+    }
+
+    .notice .date {
+      color: #777;
+      font-size: 0.9em;
+    }
+
+    .notice .title {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .notice .desc {
+      margin-top: 8px;
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    .new {
+      color: red;
+      font-weight: bold;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #0056d2;
+      color: white;
+      margin-top: 30px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Rama Computer Institute</h1>
+    <p>Empowering Students Through Technology</p>
+  </header>
+
+  <div class="notice-container">
+    <h2>📢 Latest Notices</h2>
+
+    <div class="notice">
+      <div class="date">10 November 2025</div>
+      <div class="title">Winter Batch Registration Started <span class="new">New!</span></div>
+      <div class="desc">New admissions for DCA, ADCA, and Tally courses have started. Visit the office for more details.</div>
+    </div>
+
+    <div class="notice">
+      <div class="date">05 November 2025</div>
+      <div class="title">Practical Exam Schedule Released</div>
+      <div class="desc">All students are informed that the practical exams will start from 15th November. Check your time slots in the office notice board.</div>
+    </div>
+
+    <div class="notice">
+      <div class="date">01 November 2025</div>
+      <div class="title">Holiday Notice</div>
+      <div class="desc">The institute will remain closed on 14th November on the occasion of Children’s Day.</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>📍 Naurangiya Chauraha, Near Rajesh Mani School | ☎️ 9118825965</p>
+    <p>© 2025 Rama Computer Institute. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>

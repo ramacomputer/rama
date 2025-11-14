@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: gradientBG 8s ease infinite alternate;
+    }
+    @keyframes gradientBG {
+        0% { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+        100% { background: linear-gradient(135deg, #f80759, #bc4e9c); }
+    }
+    .login-box {
+        background: rgba(255, 255, 255, 0.92);
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0px 0px 25px rgba(0,0,0,0.3);
+        width: 350px;
+        text-align: center;
+        animation: popIn 1s ease;
+    }
+    @keyframes popIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    h2 {
+        color: #0072ff;
+        margin-bottom: 10px;
+        font-size: 28px;
+    }
+    p {
+        color: #555;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 8px;
+        background: #f0f0f0;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+    input:focus, select:focus {
+        background: #e3f2fd;
+        outline: none;
+        box-shadow: 0 0 5px #0072ff;
+    }
+    .remember {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        margin: 10px 0 20px;
+        font-size: 14px;
+        color: #333;
+    }
+    .remember input {
+        width: 18px;
+        height: 18px;
+        accent-color: #0072ff;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #0072ff;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button:hover {
+        background: #0056c7;
+        transform: scale(1.03);
+    }
+    .change-btn {
+        margin-top: 10px;
+        background: #f80759;
+    }
+    .change-btn:hover {
+        background: #bc4e9c;
+    }
+    #changeForm, #forgotForm {
+        display: none;
+        margin-top: 15px;
+        animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .link-btn {
+        background: none;
+        border: none;
+        color: #0072ff;
+        cursor: pointer;
+        text-decoration: underline;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+    .link-btn:hover {
+        color: #f80759;
+    }
+</style>
+</head>
+<body>
+    <div class="login-box" id="loginBox">
+        <h2>Rama Computer Center</h2>
+        <h3>Admin Login</h3>
+
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
+
+        <select id="branch">
+            <option value="">Select Branch</option>
+            <option value="Padrauna">Padrauna</option>
+            <option value="Naurangia">Naurangia</option>
+            <option value="Kushinagar">Kushinagar</option>
+        </select>
+
+        <div class="remember">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember Me</label>
+        </div>
+
+        <button onclick="login()">Submit</button>
+        <button class="change-btn" onclick="showChangeForm()">Change Username & Password</button>
+        <button class="link-btn" onclick="showForgotForm()">Forgot Password?</button>
+
+        <!-- Change Username & Password Form -->
+        <div id="changeForm">
+            <input type="text" id="oldUser" placeholder="Old Username">
+            <input type="password" id="oldPass" placeholder="Old Password">
+            <input type="text" id="newUser" placeholder="New Username">
+            <input type="password" id="newPass" placeholder="New Password">
+            <button onclick="changeCredentials()">Save Changes</button>
+        </div>
+
+        <!-- Forgot Password Form -->
+        <div id="forgotForm">
+            <input type="text" id="mobile" placeholder="Enter Registered Mobile Number">
+            <button onclick="sendOTP()">Send OTP</button>
+            <input type="text" id="otp" placeholder="Enter OTP" style="display:none;">
+            <input type="password" id="newForgotPass" placeholder="Enter New Password" style="display:none;">
+            <button id="resetBtn" style="display:none;" onclick="resetPassword()">Reset Password</button>
+        </div>
+    </div>
+
+<script>
+    // Default credentials
+    let storedUser = "admin";
+    let storedPass = "5563";
+    const registeredMobile = "9118825966";
+    let generatedOTP = "";
+
+    // LOGIN FUNCTION
+    function login() {
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
+        const branch = document.getElementById("branch").value;
+
+        if (user === storedUser && pass === storedPass && branch === "Naurangia") {
+            alert("✅ Login Successful!");
+            window.location.href = "manage.html";
+        } else {
+            alert("❌ Invalid Username, Password, or Branch!");
+        }
+    }
+
+    // SHOW CHANGE FORM
+    function showChangeForm() {
+        document.getElementById("changeForm").style.display = "block";
+        document.getElementById("forgotForm").style.display = "none";
+    }
+
+    // CHANGE CREDENTIALS
+    function changeCredentials() {
+        const oldUser = document.getElementById("oldUser").value;
+        const oldPass = document.getElementById("oldPass").value;
+        const newUser = document.getElementById("newUser").value;
+        const newPass = document.getElementById("newPass").value;
+
+        if (oldUser === storedUser && oldPass === storedPass) {
+            storedUser = newUser;
+            storedPass = newPass;
+            alert("✅ Username and Password successfully changed!");
+            document.getElementById("changeForm").reset;
+        } else {
+            alert("❌ Old credentials incorrect!");
+        }
+    }
+
+    // SHOW FORGOT FORM
+    function showForgotForm() {
+        document.getElementById("forgotForm").style.display = "block";
+        document.getElementById("changeForm").style.display = "none";
+    }
+
+    // SEND OTP
+    function sendOTP() {
+        const mobile = document.getElementById("mobile").value;
+        if (mobile === registeredMobile) {
+            generatedOTP = Math.floor(1000 + Math.random() * 9000);
+            alert("📩 OTP sent to " + registeredMobile + " : " + generatedOTP);
+            document.getElementById("otp").style.display = "block";
+            document.getElementById("newForgotPass").style.display = "block";
+            document.getElementById("resetBtn").style.display = "block";
+        } else {
+            alert("❌ Invalid Mobile Number!");
+        }
+    }
+
+    // RESET PASSWORD USING OTP
+    function resetPassword() {
+        const otpInput = document.getElementById("otp").value;
+        const newPass = document.getElementById("newForgotPass").value;
+        if (otpInput == generatedOTP && newPass.trim() !== "") {
+            storedPass = newPass;
+            alert("✅ Password Reset Successful!");
+            document.getElementById("forgotForm").style.display = "none";
+        } else {
+            alert("❌ Invalid OTP or Empty Password!");
+        }
+    }
+</script>
+</body>
+</html>

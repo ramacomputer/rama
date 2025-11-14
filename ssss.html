@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fundamentals Quiz</title>
+  <style>
+     body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #007bff;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1em;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-btn {
+            background: #fff;
+            color: #007bff;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 0.5em;
+        }
+        .login-btn:hover {
+            background: #e0e0e0;
+        }
+        .container {
+            padding: 2em;
+            text-align: center;
+        }
+        .login-buttons {
+            display: flex;
+            gap: 0.5em;
+        }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      color: #333;
+    }
+    header {
+      background: #4A00E0;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+    }
+    footer {
+      background: #4A00E0;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    .quiz-container {
+      max-width: 700px;
+      margin: 100px auto 70px;
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .options {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .options label {
+      display: block;
+      margin: 8px 0;
+      background: #f1f1f1;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options input {
+      margin-right: 10px;
+    }
+    .options label:hover {
+      background: #dcdcdc;
+    }
+    .navigation {
+      margin-top: 20px;
+    }
+    .navigation button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #4A00E0;
+      color: white;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .navigation button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+    .navigation button:hover:enabled {
+      background: #6a11cb;
+    }
+    #result {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+    }
+    #certificate {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 4px solid #4A00E0;
+      background: #fdfdfd;
+      border-radius: 12px;
+      text-align: center;
+    }
+    #certificate h2 {
+      color: #4A00E0;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    #studentNameInput {
+      margin: 20px 0;
+      padding: 10px;
+      width: 80%;
+      border: 2px solid #4A00E0;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .correct { color: green; }
+    .wrong { color: red; }
+
+  </style>
+</head>
+<body>
+  <header>🌟 Fundamentals Quiz 🌟</header>
+
+  <div class="quiz-container">
+    <h3>Enter Your Name:</h3>
+    <input type="text" id="studentNameInput" placeholder="Enter your full name">
+
+    <div id="quiz"></div>
+
+    <div class="navigation">
+      <button onclick="prevQuestion()">⬅ Back</button>
+      <button onclick="nextQuestion()">Next ➡</button>
+      <button id="submitBtn" onclick="submitQuiz()" disabled>Submit Quiz ✅</button>
+    </div>
+
+    <div id="result"></div>
+
+    <div id="certificate">
+      <h2>🎉 Certificate of Achievement 🎉</h2>
+      <p id="cert-name" style="font-size:22px; font-weight:bold;"></p>
+      <p id="cert-text"></p>
+      <button onclick="window.print()">🖨 Print Certificate</button>
+    </div>
+  </div>
+
+  <footer>© 2025 Fundamentals Quiz | Designed with ❤️</footer>
+
+  <script>
+    const quizData = [
+      { question: "1. कंप्यूटर के आविष्कारक कौन हैं?", options: ["वॉन न्यूमेन","जेएस किल्बी","चार्ल्स बेबेज","इनमे से कोई नहीं"], answer: "चार्ल्स बेबेज" },
+      { question: "2. कंप्यूटर का हिन्दी नाम क्या है?", options: ["गणना करने वाला","परिगणक"," हिसाब करने वाला","संगणक"], answer: "संगणक" },
+      { question: "3. निम्न में कौन सी इनपुट इकाई है??", options: ["माऊस","कीबोर्ड","स्कैनर","इनमें से सभी"], answer: "इनमें से सभी" },
+      { question: "4. एक किलोबाइट (KB) कितने बाइट (Byte) के बराबर होता है?", options: ["1024 बाइट","1024 मेगाबाइट","1024 गीगाबाइट","इनमें से कोई नहीं"], answer: "1024 बाइट" },
+      { question: "5. कम्प्प्यूटरो में प्रयुक्त आई. सी. चिप बनी होती हैं?", options: ["क्रोमियम से","आयरन ऑक्साइड से","सिल्वर से","सिलिकॉन से"], answer: "सिलिकॉन से" },
+      { question: "6. CPU में कंट्रोल, मेमोरी और तीसरा कौन सा यूनिट होता हैं?", options: ["इनपुट यूनिट","आउट्पुट यूनिट","ऐरथमेटिक लॉजिक यूनिट","इसमे से कोई नहीं"], answer: "ऐरथमेटिक लॉजिक यूनिट" },
+      { question: "7. निम्न में से किस समूह में केवल आउट्पुट डिवाइसेस हैं?", options: ["माउस, कीबोर्ड, स्कैनर","मानिटर, माउस, प्रोजेक्टर","मानिटर, प्रोजेक्टर, स्पीकर","प्रोजेक्टर, माउस, कीबोर्ड"], answer: "मानिटर, प्रोजेक्टर, स्पीकर" },
+      { question: "8. ऑपरेटिंग सिस्टम किस प्रकार का सॉफ्टवेयर है?", options: ["अप्लीकेशन","सिस्टम","वर्डप्रोसेसर","कम्यूनिकेशन"], answer: "सिस्टम" },
+      { question: "9. प्रथम पीढ़ी के कंप्यूटर उपयोग करते थे?", options: [" वैक्युम ट्यूब","माइक्रोप्रोसेसर","आई सी","ट्रैन्ज़िस्टर"], answer: " वैक्युम ट्यूब" },
+      { question: "10. कंप्यूटर के बंद हो जाने पर किसका डाटा डिलीट हो जाता है?", options: ["पेन ड्राइव","रोम","रैम","हार्डडिस्क"], answer: "रैम" },
+      { question: "11. कंप्यूटर में Windows का प्रकार क्या है?", options: ["हार्डवेयर","सॉफ्टवेयर","दोनों","कोई नहीं"], answer: "सॉफ्टवेयर" },
+      { question: "12. निम्न में डाटा की सबसे छोटी इकाई है?", options: ["निबल","बिट","बाइट","किलोबाइट"], answer: "बिट" },
+      { question: "13. निम्न में से विंडोज़ का पहला संस्करण कौन सा है?", options: ["विंडोज़ ME","विंडोज़ Vista","विंडोज़ XP","विंडोज़ 95"], answer: "विंडोज़ XP" },
+      { question: "14. सबसे तेज मेमोरी होती है?", options: ["रजिस्टर","रैम","कैश (Cache)","रोम"], answer: "कैश (Cache)" },
+      { question: "15. 5 GB निम्न में से किसके बराबर होगा?", options: ["5120 MB","5120 KB","5120 Byte","5120 TB"], answer: "5120 MB" },
+      { question: "16. निम्न में से कौन सा कंप्यूटर का बुनियादी कार्य नहीं है?", options: ["डाटा को प्रोसेस करना","इनपुट को एक्सेप्ट करना","डाटा को स्कैन करना","डाटा को स्टोर करना"], answer: "डाटा को स्कैन करना" },
+      { question: "17. माउस में राइट बटन का कार्य होता हैं?", options: ["विकल्प का चयन करना","पेज स्क्रॉल करना","विकल्प खोलना","इनमे से कोई नहीं"], answer: "विकल्प का चयन करना" },
+      { question: "18. सबसे शक्तिशाली और मंहगा कंप्यूटर है?", options: ["मिनी कंप्यूटर","मेनफ्रेम कंप्यूटर","माइक्रो कंप्यूटर","सुपर कंप्यूटर"], answer: "सुपर कंप्यूटर" },
+      { question: "19. विंडोज़ में Ctrl+C शॉर्टकट का उपयोग किया जाता है?", options: ["कॉपी करने के लिए","पेस्ट करने के लिए","कट करने के लिए","कंपाइल करने के लिए"], answer: "कॉपी करने के लिए" },
+      { question: "20. डाटा को पर्मानेंट डिलीट करने के लिए निम्न में से किस शॉर्टकट का प्रयोग करते हैं?", options: ["Ctrl+Del","Alt+Del","Shift+Del","Win+Del"], answer: "Shift+Del" },
+      { question: "21. कीबोर्ड में फंगक्शन कुंजी कितनी होती हैं?", options: ["6","8","10","12"], answer: "6" },
+      { question: "22. निम्न में से कौन-सा एक हार्डवेयर है?", options: ["एक्सेल","प्रिन्टर ड्राइवर","आपरेटिंग सिस्टम","कंट्रोल यूनिट"], answer: "कंट्रोल यूनिट" },
+      { question: "23. नोटपैड में बनाई गई फाइल का Extension Name होता है?", options: ["*.jpg","*.txt","*.bmp","*.rtf"], answer: "*.txt" },
+      { question: "24. कट या कॉपी किया गया डाटा निम्न में से किसमे स्टोर रहता है?", options: ["क्लिपबोर्ड","क्लिप डाटा","रोम","हार्डडिस्क"], answer: "क्लिपबोर्ड" },
+      { question: "25. विंडोज़ ऑपरेटिंग सिस्टम को निम्न में से किसने विकसित किया है?", options: ["Intel","Apple","Microsoft","IBM"], answer: "Microsoft" },
+    ];
+
+    let currentQuestion = 0;
+    let answers = {};
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      const quizDiv = document.getElementById("quiz");
+      quizDiv.innerHTML = `
+        <div class="question">${q.question}</div>
+        <div class="options">
+          ${q.options.map(opt => `
+            <label>
+              <input type="radio" name="answer" value="${opt}" 
+              ${answers[currentQuestion]===opt?"checked":""}
+              onchange="saveAnswer()">
+              ${opt}
+            </label>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function nextQuestion() {
+      saveAnswer();
+      if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      saveAnswer();
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    }
+
+    function saveAnswer() {
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (selected) {
+        answers[currentQuestion] = selected.value;
+      }
+      checkIfAllAnswered();
+    }
+
+    function checkIfAllAnswered() {
+      const submitBtn = document.getElementById("submitBtn");
+      if (Object.keys(answers).length === quizData.length) {
+        submitBtn.disabled = false;
+      }
+    }
+
+    function submitQuiz() {
+      saveAnswer();
+      let score = 0;
+      let resultHTML = "<h3>Quiz Results:</h3>";
+      quizData.forEach((q, i) => {
+        let userAns = answers[i] || "Not Answered";
+        if (userAns === q.answer) {
+          score++;
+          resultHTML += `<p><b>Q${i+1}:</b> <span class="correct">Correct ✔ (${userAns})</span></p>`;
+        } else {
+          resultHTML += `<p><b>Q${i+1}:</b> <span class="wrong">Wrong ✘ (Your: ${userAns}, Correct: ${q.answer})</span></p>`;
+        }
+      });
+      resultHTML += `<h3>Your Score: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = resultHTML;
+      document.getElementById("result").style.display = "block";
+
+      // Certificate with student name
+      const studentName = document.getElementById("studentNameInput").value || "Student";
+      document.getElementById("certificate").style.display = "block";
+      document.getElementById("cert-name").innerText = studentName;
+      document.getElementById("cert-text").innerText = 
+        `has successfully completed the Fundamentals Quiz and scored ${score} out of ${quizData.length}.`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
+    

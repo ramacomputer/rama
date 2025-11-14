@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Rama Technical Computer Institute</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *{
+      margin:0; padding:0;
+      box-sizing:border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body{
+      
+      color:#fff;
+      overflow-x:hidden;
+    }
+    *{
+      color: black;
+    }
+    section{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:50px 10%;
+    }
+    .contact-container{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      box-shadow:0 0 20px rgba(0,0,0,0.5);
+      padding:40px;
+      animation:fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from{opacity:0; transform:translateY(40px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    .contact-info h2{
+      font-size:2.2em;
+      margin-bottom:15px;
+      color:#00bcd4;
+    }
+    .contact-info p{
+      font-size:1.1em;
+      line-height:1.8;
+    }
+    .info-box{
+      margin-top:30px;
+    }
+    .info-box div{
+      margin:10px 0;
+      display:flex;
+      align-items:center;
+    }
+    .info-box i{
+      font-size:22px;
+      margin-right:10px;
+      color:#00bcd4;
+    }
+
+    form{
+      display:flex;
+      flex-direction:column;
+    }
+    form input, form textarea{
+      background:rgba(158, 1, 1, 0.1);
+      border:none;
+      outline:none;
+      color:#000000;
+      padding:12px;
+      margin:10px 0;
+      border-radius:8px;
+      resize:none;
+      transition:0.3s;
+    }
+    form input:focus, form textarea:focus{
+      background:rgba(255,255,255,0.2);
+    }
+    form button{
+      background:#00bcd4;
+      border:none;
+      padding:12px;
+      border-radius:8px;
+      font-size:1.1em;
+      font-weight:600;
+      color:#000000;
+      cursor:pointer;
+      transition:0.3s;
+    }
+    form button:hover{
+      background:#0191a7;
+      transform:scale(1.05);
+    }
+
+    .social-links{
+      margin-top:20px;
+    }
+    .social-links a{
+      display:inline-block;
+      margin:0 8px;
+      color:#000000;
+      text-decoration:none;
+      font-size:20px;
+      transition:0.3s;
+    }
+    .social-links a:hover{
+      color:#00bcd4;
+      transform:translateY(-3px);
+    }
+
+    iframe{
+      margin-top:25px;
+      border-radius:10px;
+      border:none;
+      width:100%;
+      height:250px;
+    }
+
+    @media (max-width:900px){
+      .contact-container{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a2e0d9a26f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <section>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p>
+          Have questions about our computer courses or training programs?<br>
+          We'd love to hear from you. Reach out anytime!
+        </p>
+        <div class="info-box">
+          <div><i class="fas fa-map-marker-alt"></i> Rama Technical Computer Institute, Naurangiya Chauraha, Rajesh Mani School ke Samne</div>
+          <div><i class="fas fa-phone-alt"></i> +91 9118825965, 9026495898</div>
+          <div><i class="fas fa-envelope"></i> rtdcnk001@gmail.com</div>
+          <div><i class="fas fa-globe"></i> <a href="https://pappu9936.github.io/RTDC/" style="color:#00bcd4;">Visit Our Website</a></div>
+        </div>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+
+       
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14215.053160912688!2d83.88586158999082!3d27.037644787827308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf84904b58238b73%3A0xb28e2c84ed0c43f3!2sRama%20Technical%20Degree%20College%20Naurangiya!5e0!3m2!1sen!2sin!4v1762766740872!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <form action="#" method="post">
+        <h2 style="color:#00bcd4;">Send us a Message</h2>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
