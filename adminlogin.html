@@ -176,7 +176,7 @@ function generateSerial() {
 }
 function generateRegNo() {
     const data = JSON.parse(localStorage.getItem("students")) || [];
-    return "NK" + (1000 + data.length + 1);
+    return "NK" + (1000 + data.length + 0);
 }
 document.getElementById("srl").value = generateSerial();
 document.getElementById("regno").value = generateRegNo();
@@ -270,3 +270,4 @@ window.addEventListener("load", function(){
 
 </body>
 </html>
+
