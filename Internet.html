@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Internet Topics – Colorful Animated Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      min-height:100vh;
+      background:linear-gradient(135deg,#ff512f,#dd2476,#24c6dc,#514a9d);
+      color:#fff;
+    }
+
+    header{
+      text-align:center;
+      padding:30px 15px;
+      animation:fadeDown 1.2s ease;
+    }
+    header h1{margin:0;font-size:2.2rem}
+    header p{opacity:.9;margin-top:8px}
+
+    @keyframes fadeDown{
+      from{opacity:0;transform:translateY(-30px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    /* 🔍 Search Box */
+    .search-box{
+      text-align:center;
+      margin:20px auto 30px;
+    }
+    .search-box input{
+      width:90%;
+      max-width:420px;
+      padding:12px 15px;
+      border:none;
+      border-radius:25px;
+      font-size:1rem;
+      outline:none;
+    }
+
+    .container{max-width:1100px;margin:auto;padding:20px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.15);
+      backdrop-filter:blur(6px);
+      border-radius:18px;
+      padding:22px 18px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,.25);
+      transition:.4s;
+    }
+
+    .card:hover{
+      transform:translateY(-10px) scale(1.03);
+      background:#fff;
+    }
+    .card:hover a{color:#000}
+
+    .card a{
+      text-decoration:none;
+      color:#fff;
+      font-weight:bold;
+      display:block;
+    }
+
+    footer{
+      text-align:center;
+      padding:18px 10px;
+      font-size:.9rem;
+      opacity:.9;
+    }
+
+    audio{display:none}
+  </style>
+</head>
+<body>
+
+<audio id="clickSound">
+  <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  function playSound(){
+    const sound = document.getElementById('clickSound');
+    sound.currentTime = 0;
+    sound.play();
+  }
+
+  /* 🔍 Search Function */
+  function searchTopics(){
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+      let text = card.innerText.toLowerCase();
+      card.style.display = text.includes(input) ? "block" : "none";
+    });
+  }
+</script>
+
+<header>
+  <h1>🌐 Internet Topics</h1>
+  <p>Internet se jude 22 important topics – Rama Technical Degree College</p>
+</header>
+
+<!-- 🔍 Search Box -->
+<div class="search-box">
+  <input type="text" id="searchInput" onkeyup="searchTopics()" placeholder="Search Internet Topic...">
+</div>
+
+<div class="container">
+  <div class="grid">
+    <div class="card"><a href="#" onclick="playSound()">1. Email</a></div>
+    <div class="card"><a href="https://student.nielit.gov.in/" onclick="playSound()">2. Online Apply For CCC</a></div>
+    <div class="card"><a href="https://certificate.nielit.gov.in/" onclick="playSound()">3. Download CCC Certificate</a></div>
+    <div class="card"><a href="https://onlineservices.proteantech.in/paam/endUserRegisterContact.html" onclick="playSound()">4. PAN Card (NSDL)</a></div>
+    <div class="card"><a href="https://voters.eci.gov.in/" onclick="playSound()">5. Voter ID Card (NVSP)</a></div>
+    <div class="card"><a href="https://uidai.gov.in/" onclick="playSound()">6. Aadhaar Portal ( UIDAI)</a></div>
+    <div class="card"><a href="https://parivahan.gov.in/" onclick="playSound()">7. New Driving License ( Sarathi) for UP</a></div>
+    <div class="card"><a href="https://esathi.up.gov.in/citizenservices/login/login.aspx" onclick="playSound()">8. UP eSathi Portal(आय प्रमाण पत्र , जाति प्रमाण पत्र ,निवास प्रमाण पत्र)</a></div>
+    <div class="card"><a href="https://sspy-up.gov.in/HindiPages/index_h.aspx" onclick="playSound()">9. UP Pension Scheme</a></div>
+    <div class="card"><a href="https://www.passportindia.gov.in/psp" onclick="playSound()">10. Passport Seva </a></div>
+    <div class="card"><a href="https://scholarship.up.gov.in//" onclick="playSound()">11. UP Scholarship</a></div>
+    <div class="card"><a href="https://tafcop.sancharsaathi.gov.in/telecomUser//" onclick="playSound()">12. Sanchar Sathi</a></div>
+    <div class="card"><a href="https://enquiry.caneup.in//" onclick="playSound()">13. Cane UP Enquiry |</a></div>
+    <div class="card"><a href="https://fcs.up.gov.in/" onclick="playSound()">14. राशन कार्ड उतर प्रदेश</a></div>
+    <div class="card"><a href="https://echallan.parivahan.gov.in/index/accused-challan/" onclick="playSound()">15. गाड़ी के चालान की स्थिति</a></div>
+    <div class="card"><a href="https://upbhulekh.gov.in/#/home" onclick="playSound()">16. UP Bhulekh</a></div>
+    <div class="card"><a href="https://www.irctc.co.in/nget/train-search/" onclick="playSound()">17. IRCTC (Train Ticket)</a></div>
+    <div class="card"><a href="https://pmkisan.gov.in//" onclick="playSound()">18. PM KISAN SAMMAN NIDHI</a></div>
+    <div class="card"><a href="https://bookmyhsrp.com///" onclick="playSound()">19. High Security Number Plate</a></div>
+    <div class="card"><a href="https://upbhunaksha.gov.in//" onclick="playSound()">20. BhuNaksha</a></div>
+  </div>
+</div>
+
+<footer>
+  © 2026 | Internet Topics From Rama Technical Degree College
+</footer>
+
+</body>
+</html>
