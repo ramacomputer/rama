@@ -1,297 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <title>Fundamentals Quiz</title>
+  <meta charset="UTF-8" />
+  <title>Rama Technical Degree College Computer Education - Online Quiz</title>
   <style>
-     body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background: #007bff;
-            padding: 1em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-links {
-            display: flex;
-            gap: 1em;
-        }
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .login-btn {
-            background: #fff;
-            color: #007bff;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 0.5em;
-        }
-        .login-btn:hover {
-            background: #e0e0e0;
-        }
-        .container {
-            padding: 2em;
-            text-align: center;
-        }
-        .login-buttons {
-            display: flex;
-            gap: 0.5em;
-        }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-      color: #333;
-    }
-    header {
-      background: #4A00E0;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 24px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 10;
-    }
-    footer {
-      background: #4A00E0;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    .quiz-container {
-      max-width: 700px;
-      margin: 100px auto 70px;
-      background: white;
-      border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-    .question {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-    .options {
-      text-align: left;
-      margin-bottom: 20px;
-    }
-    .options label {
-      display: block;
-      margin: 8px 0;
-      background: #f1f1f1;
-      padding: 8px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .options input {
-      margin-right: 10px;
-    }
-    .options label:hover {
-      background: #dcdcdc;
-    }
-    .navigation {
-      margin-top: 20px;
-    }
-    .navigation button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #4A00E0;
-      color: white;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    .navigation button:disabled {
-      background: #999;
-      cursor: not-allowed;
-    }
-    .navigation button:hover:enabled {
-      background: #6a11cb;
-    }
-    #result {
-      display: none;
-      margin-top: 20px;
-      text-align: left;
-    }
-    #certificate {
-      display: none;
-      margin-top: 20px;
-      padding: 20px;
-      border: 4px solid #4A00E0;
-      background: #fdfdfd;
-      border-radius: 12px;
-      text-align: center;
-    }
-    #certificate h2 {
-      color: #4A00E0;
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-    #studentNameInput {
-      margin: 20px 0;
-      padding: 10px;
-      width: 80%;
-      border: 2px solid #4A00E0;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    .correct { color: green; }
-    .wrong { color: red; }
+    body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#2196f3,#9c27b0);margin:0;animation:bgmove 10s infinite alternate}
+    @keyframes bgmove{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(40deg)}}
+    .header{background:#fff;color:#3f51b5;padding:12px 15px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 10px rgba(0,0,0,.2);animation:slideDown 1s}
+    .header img{height:50px;width:50px;object-fit:contain}
+    .header-title{font-size:24px;font-weight:bold;letter-spacing:1px}
+    @keyframes slideDown{from{transform:translateY(-50px);opacity:0}to{transform:translateY(0);opacity:1}}
 
+    .container{max-width:1100px;margin:20px auto;background:#ffffffdd;padding:20px;border-radius:12px;display:flex;gap:20px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+    .left{flex:3}
+    .right{flex:1;border-left:2px dashed #9c27b0;padding-left:15px}
+
+    h2{margin-top:0;color:#3f51b5}
+    .option{margin:8px 0;padding:6px;border-radius:6px;transition:.3s}
+    .option:hover{background:#e3f2fd}
+
+    button{padding:9px 16px;margin:5px;border:none;border-radius:20px;cursor:pointer;font-weight:bold;transition:.3s}
+    button:hover{transform:scale(1.05)}
+
+    .nav-btn{background:#2196f3;color:#fff}
+    .mark-btn{background:#ff9800;color:#fff}
+    .submit-btn{background:#2e7d32;color:#fff}
+
+    .qbox{margin-bottom:15px;animation:fadeIn .5s}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    .qnum{font-weight:bold;color:#e91e63}
+
+    .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .grid button{padding:8px;font-size:12px;border-radius:50%}
+
+    .active{background:#3f51b5;color:#fff}
+    .answered{background:#4caf50;color:#fff}
+    .marked{background:#ff9800;color:#fff}
+
+    .timer{font-weight:bold;color:#d32f2f;margin-bottom:10px;font-size:18px;animation:pulse 1s infinite alternate}
+    @keyframes pulse{from{transform:scale(1)}to{transform:scale(1.08)}}
+
+    .correct{color:green;font-weight:bold}
+    .wrong{color:red;font-weight:bold}
+
+    footer{background:#1a237e;color:#fff;text-align:center;padding:12px;margin-top:20px;font-size:14px}
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media(max-width:768px){
+      .container{flex-direction:column;padding:15px}
+      .right{border-left:none;border-top:2px dashed #9c27b0;padding-left:0;padding-top:10px}
+      .grid{grid-template-columns:repeat(6,1fr)}
+      .header-title{font-size:18px}
+      .timer{font-size:16px}
+    }
   </style>
 </head>
 <body>
-  <header>🌟 Fundamentals Quiz 🌟</header>
+<div class="header">
+  <img src="RTDC_LOGO.png" alt="Institute Logo">
+  <div class="header-title">Rama Technical Degree College Computer Education</div>
+</div>
 
-  <div class="quiz-container">
-    <h3>Enter Your Name:</h3>
-    <input type="text" id="studentNameInput" placeholder="Enter your full name">
+<!-- ===== QUESTION BANK (YAHAN 100 QUESTION TYPE KARE) ===== -->
+<script>
+// har question me question, options (4), aur correct index (0-3)
+const QUESTION_BANK = [
+  {q:"RAM का पूरा नाम क्या है? ", o:["रैंडम एक्सेस मेमोरी","रीड एक्सेस मेमोरी","रेटिना एक्सेस मैमोरी","रैंडम अवेलेबल मेमोरी"], a:0},
+  {q:"कंप्यूटर में डेटा इनपुट करने के लिए किस उपकरण का उपयोग किया जाता है?", o:["प्रिंटर","मॉनिटर","कीबोर्ड","स्पीकर"], a:2},
+  {q:"निम्नलिखित में से कौन सा सिस्टम सॉफ्टवेयर का उदाहरण है?", o:["माइक्रोसॉफ्ट एक्सेल","विंडोज 10","गूगल क्रोम","एडोब रीडर"], a:1},
+  {q:"निम्नलिखित में से कौन सी प्रोग्रामिंग भाषा नहीं है?", o:["पायथन","एचटीएमएल","जावा","माइक्रोसॉफ्ट वर्ड"], a:3},
+  {q:"कंप्यूटर का कौन सा भाग निर्देशों को निष्पादित करने के लिए जिम्मेदार है?", o:["हार्ड डिस्क","रैम","सीपीयू","मदरबोर्ड"], a:2},
+  {q:"किस भंडारण उपकरण की क्षमता सबसे अधिक है?", o:["डीवीडी","यूएसबी फ्लैश ड्राइव","एसएसडी","हार्ड डिस्क ड्राइव"], a:3},
+  {q:"GUI का पूरा नाम क्या है?", o:["ग्राफिकल यूजर इंटरफेस","सामान्य यूजर इंटरफेस","गाइडेड यूजर इंटरफेस","ग्राफिकल यूजर इंटरेक्शन"], a:0},
+  {q:"निम्नलिखित में से कौन सी एक अस्थिर स्मृति है?", o:["एसएसडी","हार्ड डिस्क","रैम"], a:2},
+  {q:"ऑपरेटिंग सिस्टम का मुख्य कार्य क्या है?", o:["गणना करना","हार्डवेयर और सॉफ्टवेयर संसाधनों का प्रबंधन करना","इंटरनेट ब्राउज़ करना","दस्तावेज़ बनाना"], a:1},
+  {q:"URL का पूरा नाम क्या है?", o:["यूनिफॉर्म रिसोर्स लोकेटर","यूनिफॉर्म रिसोर्स लिंक","यूनिवर्सल रिसोर्स लोकेटर","यूनिवर्सल रिसोर्स लिंक"], a:0},
+  {q:"कंप्यूटर नेटवर्क में फ़ायरवॉल का उद्देश्य क्या है?", o:["इंटरनेट की गति बढ़ाने के लिए","अनधिकृत पहुंच से सुरक्षा के लिए","नेटवर्क ट्रैफिक को प्रबंधित करने के लिए","वाई-फाई सिग्नल को बढ़ाने के लिए"], a:1},
+  {q:"वेब ब्राउज़ करने के लिए किस प्रकार के सॉफ़्टवेयर का उपयोग किया जाता है?", o:["ऑपरेटिंग सिस्टम","वेब ब्राउज़र","डेटाबेस","टेक्स्ट एडिटर"], a:1},
+  {q:"HTTP का पूरा नाम क्या है?", o:["प्रिंटरहाइपरटेक्स्ट ट्रांसमिशन प्रोटोकॉल","हाइपरटेक्स्ट ट्रांसफर प्रोटोकॉल","हाइपरट्रांसफर टेक्स्ट प्रोटोकॉल","हाइपर ट्रांसमिशन ट्रांसफर प्रोटोकॉल"], a:1},
+  {q:"निम्नलिखित में से कौन सा इनपुट डिवाइस का उदाहरण है?", o:["प्रिंटर","मॉनिटर","माउस","स्पीकर"], a:2},
+  {q:"कंप्यूटर में डेटा की सबसे छोटी इकाई क्या है?", o:["बाइट","बिट","निबल","किलोबाइट"], a:1},
+  {q:"कंप्यूटर में ALU का उद्देश्य क्या है?", o:["मेमोरी का प्रबंधन करना","अंकगणितीय और तार्किक संक्रियाएँ करना","इनपुट और आउटपुट को नियंत्रित करना","भंडारण का प्रबंधन करना"], a:1},
+  {q:"छवियों (Picture) के लिए किस फ़ाइल प्रारूप का उपयोग किया जाता है?", o:[".docx",".xlsx",".jpg",".pptx"], a:2},
+  {q:"कर्सर के बाईं ओर के अक्षर को हटाने के लिए किस कुंजी का उपयोग किया जाता है?", o:["एंटर","बैकस्पेस","डिलीट","शिफ्ट"], a:1},
+  {q:"निम्नलिखित में से कौन सा सर्च इंजन है?", o:["फ़ायरफ़ॉक्स","बिंग","आउटलुक","स्काइप"], a:1},
+  {q:"Ctrl + C शॉर्टकट क्या करता है?", o:["चयनित पाठ को काटता है","चयनित पाठ की प्रतिलिपि बनाता है","प्रतिलिपि किए गए पाठ को पेस्ट करता है","दस्तावेज़ को सहेजता है"], a:1},
+  {q:"विंडोज़ में कंट्रोल पैनल का क्या कार्य है?", o:["वेब ब्राउज़र का उपयोग करने के लिए","सेटिंग्स बदलने और सिस्टम कॉन्फ़िगरेशन को नियंत्रित करने के लिए","दस्तावेज़ों को संपादित करने के लिए","मीडिया फ़ाइलों को चलाने के लिए"], a:1},
+  {q:"निम्नलिखित में से कौन सा एक लोकप्रिय स्प्रेडशीट एप्लिकेशन है?", o:["माइक्रोसॉफ्ट वर्ड","माइक्रोसॉफ्ट एक्सेल","माइक्रोसॉफ्ट एक्सेस","माइक्रोसॉफ्ट पॉवरपॉइंट"], a:1},
+  {q:"निम्नलिखित में से कौन सी प्रोग्रामिंग भाषा है?", o:["क्रोम","पायथन","विंडोज","फोटोशॉप"], a:1},
+  {q:"एसएसडी का पूरा नाम क्या है?", o:["सॉलिड स्टेट ड्राइव","स्टैंडर्ड स्टोरेज डिस्क","स्टैटिक स्टेट डिस्क","सॉलिड स्टोरेज ड्राइव"], a:0},
+  {q:"निम्नलिखित में से कौन सा एप्लिकेशन सॉफ़्टवेयर का उदाहरण है?", o:["लिनक्स","मैकओएस","नोटपैड","बायोस"], a:2},
+  {q:"वेबपेज को रीफ्रेश करने के लिए किस कुंजी का उपयोग किया जाता है?", o:["एफ1","एफ2","एफ5","एफ12"], a:2},
+  {q:"निम्नलिखित में से कौन सी क्लाउड स्टोरेज सेवा है?", o:["वनड्राइव","विंडोज एक्सप्लोरर","फाइल मैनेजर","टास्क मैनेजर"], a:0},
+  {q:"LAN का पूरा नाम क्या है?", o:["लोकल एक्सेस नेटवर्क","लार्ज एरिया नेटवर्क","लोकल एरिया नेटवर्क","लॉन्ग एरिया नेटवर्क"], a:2},
+  {q:"निम्नलिखित में से किसका उपयोग कंप्यूटर को वायरस से बचाने के लिए किया जा सकता है?", o:["फ़ाइल एक्सप्लोरर","एंटीवायरस सॉफ़्टवेयर","टास्क मैनेजर"," डिस्क क्लीनअप"], a:1},
+  {q:"FTP का पूरा नाम क्या है?", o:["फ़ाइल स्थानांतरण प्रोटोकॉल","तेज़ स्थानांतरण प्रोटोकॉल","फ़ाइल संचरण प्रक्रिया","तेज़ संचरण प्रक्रिया"], a:0},
+  {q:"निम्नलिखित में से कौन सा ओपन-सोर्स ऑपरेटिंग सिस्टम है?", o:["विंडोज","मैकओएस","लिनक्स","आईओएस"], a:2},
+  {q:"किसी वेबसाइट के मुख्य पृष्ठ को क्या कहते हैं?", o:["बुकमार्क","होमपेज","ब्राउज़र","टैब"], a:1},
+  {q:"निम्नलिखित में से किसका उपयोग वीडियो कॉन्फ्रेंसिंग के लिए किया जाता है?", o:["ज़ूम","स्पॉटिफ़ाई","आईट्यून्स","फ़ोटोशॉप"], a:0},
+  {q:"कंप्यूटर शुरू करते समय BIOS सेटअप में प्रवेश करने के लिए...", o:["एस्केप","एफ2","एफ8","एफ10"], a:2},
+  {q:"Ctrl + V शॉर्टकट क्या करता है?", o:["चयनित पाठ की प्रतिलिपि बनाता है","प्रतिलिपि किए गए पाठ को पेस्ट करता है","चयनित पाठ को काटता है","सभी पाठ का चयन करता है"], a:1},
+  {q:"कंप्यूटर के आविष्कारक कौन हैं?", o:["वॉन न्यूमेन","जेएस किल्बी","चार्ल्स बेबेज","इनमे से कोई नहीं"], a:2},
+  {q:"कंप्यूटर का हिन्दी नाम क्या है?", o:["गणना करने वाला","संगणक","हिसाब करने वाला","परिगणक"], a:1},
+  {q:"कंप्यूटर साक्षरता दिवस कब मनाया जाता है?", o:["5 दिसंबर","14 दिसंबर","22 दिसंबर","2 दिसंबर"], a:3},
+  {q:"निम्न में कौन सी इनपुट इकाई है?", o:["माऊस","कीबोर्ड","स्कैनर","इनमें से सभी"], a:3},
+  {q:"एक किलोबाइट (KB) कितने बाइट (Byte) के बराबर होता है?", o:["1024 बाइट","1024 मेगाबाइट","1024 गीगाबाइट","इनमें से कोई नहीं"], a:0},
+  {q:"कम्प्प्यूटरो में प्रयुक्त आई. सी. चिप बनी होती हैं?", o:["क्रोमियम से","आयरन ऑक्साइड से","सिल्वर से","सिलिकॉन से"], a:3},
+  {q:"CPU में कंट्रोल, मेमोरी और तीसरा कौन सा यूनिट होता हैं?", o:["इनपुट यूनिट","आउट्पुट यूनिट","ऐरथमेटिक लॉजिक यूनिट","इसमे से कोई नहीं"], a:2},
+  {q:"निम्न में से किस समूह में केवल आउट्पुट डिवाइसेस हैं?", o:["माउस, कीबोर्ड, स्कैनर","मानिटर, माउस, प्रोजेक्टर","मानिटर, प्रोजेक्टर, स्पीकर","प्रोजेक्टर, माउस, कीबोर्ड"], a:2},
+  {q:"ऑपरेटिंग सिस्टम किस प्रकार का सॉफ्टवेयर है?", o:["अप्लीकेशन","वर्डप्रोसेसर","कम्यूनिकेशन","सिस्टम"], a:3},
+  {q:"गणना और तुलना करने के लिए कंप्यूटर के किस भाग का उपयोग किया जाता है?", o:["कंट्रोल यूनिट","अरिथमेटिक लॉजिक यूनिट","इनपुट यूनिट","मेमोरी यूनिट"], a:1},
+  {q:"प्रथम पीढ़ी के कंप्यूटर उपयोग करते थे?", o:["वैक्युम ट्यूब","माइक्रोप्रोसेसर","आई सी","ट्रैन्ज़िस्टर"], a:0},
+  {q:"कंप्यूटर के बंद हो जाने पर किसका डाटा डिलीट हो जाता है?", o:["पेन ड्राइव","रोम","रैम","हार्डडिस्क"], a:2},
+  {q:"कंप्यूटर में Windows का प्रकार क्या है?", o:["हार्डवेयर","सॉफ्टवेयर","दोनों","कोई नहीं"], a:1},
+  {q:"सबसे तेज मेमोरी होती है?", o:["रजिस्टर","रैम","कैश (Cache)","रोम"], a:2},
+  {q:"सीडी रोम में अधिकतम डाटा स्टोर किया जा सकता है?", o:["1.44 MB","700 MB","4.7 GB","360 KB"], a:1},
+  {q:"निम्न में से किस भाषा के लिए कंपाइलर इस्तेमाल किया जाता है?", o:["बाइनरी भाषा","अससेम्बली भाषा","उच्च स्तरीय भाषा","इसमे से कोई नहीं"], a:2},
+  {q:"5 GB निम्न में से किसके बराबर होगा?", o:["5120 MB","5120 KB","5120 Byte","5120 TB"], a:0},
+  {q:"LSIC तकनीक का इस्तेमाल निम्न में से किस पीढ़ी के कंप्यूटरों में किया गया था?", o:["प्रथम","दूसरी","तीसरी","चौथी"], a:2},
+  {q:"माउस में राइट बटन का कार्य होता हैं?", o:["विकल्प का चयन करना","पेज स्क्रॉल करना","विकल्प खोलना","इनमे से कोई नहीं"], a:0},
+  {q:"निम्न में से एक यूटिलिटी प्रोग्राम है?", o:["नोटपैड","कैलक्यूलेटर","डिस्क क्लीनअप","वेब ब्राउजर"], a:2},
+  {q:"हेक्साडेसीमल संख्याओं का आधार (Base) होता है?", o:["2","8","16","10"], a:2},
+  {q:"सबसे शक्तिशाली और मंहगा कंप्यूटर है?", o:["मिनी कंप्यूटर","मेनफ्रेम कंप्यूटर","माइक्रो कंप्यूटर","सुपर कंप्यूटर"], a:3},
+  {q:"वोलाटाइल मेमोरी कहलाती है?", o:["रैम","रोम","दोनों","कोई नहीं"], a:0},
+  {q:"डाटा को पर्मानेंट डिलीट करने के लिए निम्न में से किस शॉर्टकट का प्रयोग करते हैं?", o:["Ctrl+Del","Alt+Del","Shift+Del","Win+Del"], a:2},
+  {q:"भारत में निर्मित परम कंप्यूटर का अविस्कार किस संस्था ने किया?", o:["ISRO","C-DAC","IIT-Delhi","IIT-Roorkee"], a:1},
+  {q:"कीबोर्ड में फंगक्शन कुंजी कितनी होती हैं?", o:["6","8","10","12"], a:3},
+  {q:"एक्‍सटर्नल डिवाइस को सिस्‍टम यूनिट से निम्न में से किसकी मदद से जोड़ा जाता है?", o:["बस","पोर्ट","जम्पर","मदरबोर्ड"], a:1},
+  {q:"निम्न में से कौन सी प्राइमरी मेमोरी है?", o:["फ्लापी डिस्क","हार्ड डिस्क","रोम","इनमे से कोई नहीं"], a:2},
+  {q:"निम्नलिखित में से कौन-सा शब्द इंटरनेट से संबंधित नहीं है?", o:["ब्राउजर","लिंक","फाइल","सर्च इंजन"], a:2},
+  {q:"निम्न में से कौन-सा एक हार्डवेयर है?", o:["एक्सेल","प्रिन्टर ड्राइवर","आपरेटिंग सिस्टम","कंट्रोल यूनिट"], a:3},
+  {q:"नोटपैड में बनाई गई फाइल का Extension Name होता है?", o:["*.jpg","*.txt","*.bmp","*.rtf"], a:1},
+  {q:"बैंकों में नकली चेकों की पहचान करने के लिए निम्न से कौन सी डिवाइस का इस्तेमाल होता है?", o:["OCR","OMR","BCR","MICR"], a:3},
+  {q:"टास्कबार पर खुले हुए प्रोग्रामों को स्विच करने के लिए निम्न में से किस शॉर्टकट का उपयोग होता है?", o:["Alt+M"," Alt+S","Alt+Tab","Alt+Shift"], a:2},
+  {q:"कट या कॉपी किया गया डाटा निम्न में से किसमे स्टोर रहता है?", o:["क्लिपबोर्ड","क्लिप डाटा","रोम","हार्डडिस्क"], a:0},
+  {q:"माइक्रोसॉफ्ट डॉस (DOS) में फाइल को हाइड करने के लिए निम्न में से किस कमांड का उपयोग किया जाता है?", o:["Hide","Echo","Mode","Attrib"], a:3},
+  {q:"HTTP का फुल फॉर्म है?", o:["Hyper Text Transfer Protocol","Hyper Type Transfer Protocol","High Text Transfer Protocol","High Type Transfer Protocol"], a:0},
+  {q:"विंडोज़ ऑपरेटिंग सिस्टम को निम्न में से किसने विकसित किया है?", o:["Intel","Apple","Microsoft","IBM"], a:2},
+  {q:"बूटिंग शब्द से क्या तात्पर्य है?", o:["कंप्यूटर बंद करना","कंप्यूटर चालू करना","सॉफ्टवेयर इंस्टॉल करना","फ़ाइलें हटाना"], a:1},
+  {q:"विंडोज क्या है?", o:["एप्लीकेशन सॉफ्टवेयर","यूटिलिटी सॉफ्टवेयर","ऑपरेटिंग सिस्टम","हार्डवेयर"], a:2},
+  {q:"कंप्यूटर की कितनी पीढियां होती है?", o:["तीन","चार","पांच","छः"], a:2},
+  {q:"भारत में सबसे पहले किस कंप्यूटर को बनाया गया था?", o:["परम","सुपर","सिद्धार्थ","गौतम"], a:2},
+  {q:"PC का पूरा नाम है?", o:["प्रोग्राम काउंटर","पर्सनल कंप्यूटर","पर्सनल काउंटर","प्रोग्राम कंप्यूटर"], a:1},
+  {q:".mp4 कौन सा फ़ाइल फॉरमेट है?", o:["ऑडियो फाइल फॉरमेट","इमेज फाइल फॉरमेट","वीडियो फाइल फॉरमेट","इनमें से कोई नहीं."], a:2},
+  {q:"डॉक्यूमेंट को SAVE करने के लिए किस कमांड का इस्तेमाल किया जाता है?", o:["Ctrl + C","Ctrl + P","Shift + X","Ctrl + S"], a:3},
+  {q:"डॉक्यूमेंट में मौजूद text को cut करने के लिए किस कमांड का इस्तेमाल किया जाता है?", o:["Ctrl + C","Ctrl + P","Shift + X","Ctrl + X"], a:3},
+  {q:"DOS का पूरा नाम क्या है ?", o:["डिस्क ऑपरेटिंग सिस्टम","डिजिटल ऑपरेशन सिस्टम","डिपार्टमेन्ट ऑपरेटिंग सिस्टम","दिल ऑपरेटिंग सिस्टम"], a:0},
+  {q:"WI-FI का पूरा नाम क्या है?", o:["वायरलेस फिडेलिटी","वायरलेस फीचर","वायरलेस फैसिलिटी","वायरलेस फंक्शन"], a:0},
+  {q:"निम्नलिखित में से किसका इस्तेमाल डेटा को स्टोर करने के लिए किया जाता है?", o:["सीपीयू","पेन ड्राइव","कीबोर्ड","प्रिंटर"], a:1},
+  {q:"निम्न में से एप्लीकेशन सॉफ्टवेयर कौन है?", o:["कम्पाइलर","असेम्बलर","डिबगर","MS Paint"], a:3},
+  {q:"जॉयस्टिक का इस्तेमाल किया जाता है?", o:["गेमिंग के लिए","मौसम का पूर्वानुमान लगाने के लिए","प्रोग्रामिंग के लिए","पब्लिशिंग के लिए"], a:0},
+  {q:"कंप्यूटर के कार्य करने का क्या सिद्धांत है ?", o:["प्रोसेस","आउटपुट","इनपुट","उपरोक्त सभी"], a:0},
+  {q:"प्रोसेस्ड डेटा को क्या कहते है ?", o:["आउटपुट","इनपुट","प्रोसेस","उपरोक्त सभी"], a:0},
+  {q:"निम्न मे से कौन कंप्यूटर के सभी भागो के बीच सामंजस्य स्थापित करता है ?", o:["लॉजिक यूनिट","कंट्रोल यूनिट","अर्थमेटिक लॉजिक यूनिट","उपरोक्त सभी"], a:1},
+  {q:"इनपुट का आउटपुट मे रूपान्तरण किसके द्वारा किया जाता है ?", o:["मेमोरी द्वारा","पेरिफेरल्स द्वारा","इनपुट तथा आउटपुट द्वारा","सी० पी० यू द्वारा"], a:3},
+  {q:"C.P.U. के A.L.U मे ……………होते है ?", o:["रजिस्टर","RAM स्पेस","सेकंडरी स्टोरेज स्पेस","बाइट स्पेस"], a:0},
+  {q:"एक हार्डवेयर डिवाइस जो डाटा को अर्थपूर्ण इनफार्मेशन मे परिवर्तित करता है , वह कौनसी है?", o:["प्रोटेक्टर","आउटपुट डिवाइस","इनपुट डिवाइस","प्रोसेसर"], a:3},
+  {q:"बेसिक कम्प्यूटर प्रोसेसिग चक्र मे ………… शामिल होते है ?", o:["डाटा, सूचना और एप्लीकेशन","सिस्टम्स और एप्लीकेशन","इनपुट, प्रोसैसिग और आउटपुट","इनमें से कोई नहीं"], a:2},
+  {q:"CPU और I/O के बीच सिग्नल के संचलन को कौन नियंत्रित करता है ?", o:["मेमोरी यूनिट","ALU","कंट्रोल यूनिट","इनमें से कोई नहीं"], a:2},
+  {q:"DVD का पूरा नाम क्या है?", o:["डिजिटल वर्सटाइल डिस्क","डिजिटल वीडियो डिस्क","डिजिटल वैम्पायर डिस्क","डॉक्यूमेंट वीडियो डिस्क"], a:0},
+  {q:"CD का पूरा नाम क्या है?", o:["कॉम्पैक्ट डिस्क","कॉमन डिस्क","करैक्टर डिस्क","इनमें से कोई नहीं"], a:0},
+  {q:"निम्नलिखित में से हार्डवेयर डिवाइस नहीं है?", o:["मॉनिटर","CPU","माउस","excel"], a:3},
+  {q:"1 KB में कितने बाइट होते हैं?", o:["1024 byte","1024 bit","1000 byte","1000 bit"], a:0},
+  {q:"कंप्यूटर में कौन-सी यूनिट होती हैं?", o:["मैमोरी यूनिट","कण्ट्रोल यूनिट","अर्थमेटिक लॉजिक यूनिट","उपरोक्त सभी"], a:3},
+  {q:"डॉट मैट्रिक्स क्या है?", o:["प्रिंटर","स्कैनर","प्रोजेक्टर","माउस"], a:0},
 
-    <div id="quiz"></div>
+  // 👉 isi format me kam se kam 100 question add kare
+];
+</script>
 
-    <div class="navigation">
-      <button onclick="prevQuestion()">⬅ Back</button>
-      <button onclick="nextQuestion()">Next ➡</button>
-      <button id="submitBtn" onclick="submitQuiz()" disabled>Submit Quiz ✅</button>
+<div class="container" id="quizApp" style="display:none">
+  <div class="left">
+    <div class="timer" id="timer">Time:30:00</div>
+    <div class="qbox">
+      <div class="qnum" id="qnum"></div>
+      <div id="question"></div>
+      <div id="options"></div>
     </div>
-
-    <div id="result"></div>
-
-    <div id="certificate">
-      <h2>🎉 Certificate of Achievement 🎉</h2>
-      <p id="cert-name" style="font-size:22px; font-weight:bold;"></p>
-      <p id="cert-text"></p>
-      <button onclick="window.print()">🖨 Print Certificate</button>
-    </div>
+    <button class="nav-btn" onclick="prevQ()">Back</button>
+    <button class="nav-btn" onclick="nextQ()">Next</button>
+    <button class="mark-btn" onclick="markLater()">Mark for Later</button>
+    <button class="submit-btn" onclick="submitQuiz()">Submit</button>
   </div>
+  <div class="right">
+    <h3>Question Status</h3>
+    <div class="grid" id="qGrid"></div>
+  </div>
+</div>
 
-  <footer>© 2025 Fundamentals Quiz | Designed with ❤️</footer>
+<div class="container" id="result" style="display:none">
+  <div class="left">
+    <h2>Result</h2>
+    <p id="score"></p>
+    <div id="review"></div>
+  </div>
+</div>
 
-  <script>
-    const quizData = [
-      { question: "1. कंप्यूटर के आविष्कारक कौन हैं?", options: ["वॉन न्यूमेन","जेएस किल्बी","चार्ल्स बेबेज","इनमे से कोई नहीं"], answer: "चार्ल्स बेबेज" },
-      { question: "2. कंप्यूटर का हिन्दी नाम क्या है?", options: ["गणना करने वाला","परिगणक"," हिसाब करने वाला","संगणक"], answer: "संगणक" },
-      { question: "3. निम्न में कौन सी इनपुट इकाई है??", options: ["माऊस","कीबोर्ड","स्कैनर","इनमें से सभी"], answer: "इनमें से सभी" },
-      { question: "4. एक किलोबाइट (KB) कितने बाइट (Byte) के बराबर होता है?", options: ["1024 बाइट","1024 मेगाबाइट","1024 गीगाबाइट","इनमें से कोई नहीं"], answer: "1024 बाइट" },
-      { question: "5. कम्प्प्यूटरो में प्रयुक्त आई. सी. चिप बनी होती हैं?", options: ["क्रोमियम से","आयरन ऑक्साइड से","सिल्वर से","सिलिकॉन से"], answer: "सिलिकॉन से" },
-      { question: "6. CPU में कंट्रोल, मेमोरी और तीसरा कौन सा यूनिट होता हैं?", options: ["इनपुट यूनिट","आउट्पुट यूनिट","ऐरथमेटिक लॉजिक यूनिट","इसमे से कोई नहीं"], answer: "ऐरथमेटिक लॉजिक यूनिट" },
-      { question: "7. निम्न में से किस समूह में केवल आउट्पुट डिवाइसेस हैं?", options: ["माउस, कीबोर्ड, स्कैनर","मानिटर, माउस, प्रोजेक्टर","मानिटर, प्रोजेक्टर, स्पीकर","प्रोजेक्टर, माउस, कीबोर्ड"], answer: "मानिटर, प्रोजेक्टर, स्पीकर" },
-      { question: "8. ऑपरेटिंग सिस्टम किस प्रकार का सॉफ्टवेयर है?", options: ["अप्लीकेशन","सिस्टम","वर्डप्रोसेसर","कम्यूनिकेशन"], answer: "सिस्टम" },
-      { question: "9. प्रथम पीढ़ी के कंप्यूटर उपयोग करते थे?", options: [" वैक्युम ट्यूब","माइक्रोप्रोसेसर","आई सी","ट्रैन्ज़िस्टर"], answer: " वैक्युम ट्यूब" },
-      { question: "10. कंप्यूटर के बंद हो जाने पर किसका डाटा डिलीट हो जाता है?", options: ["पेन ड्राइव","रोम","रैम","हार्डडिस्क"], answer: "रैम" },
-      { question: "11. कंप्यूटर में Windows का प्रकार क्या है?", options: ["हार्डवेयर","सॉफ्टवेयर","दोनों","कोई नहीं"], answer: "सॉफ्टवेयर" },
-      { question: "12. निम्न में डाटा की सबसे छोटी इकाई है?", options: ["निबल","बिट","बाइट","किलोबाइट"], answer: "बिट" },
-      { question: "13. निम्न में से विंडोज़ का पहला संस्करण कौन सा है?", options: ["विंडोज़ ME","विंडोज़ Vista","विंडोज़ XP","विंडोज़ 95"], answer: "विंडोज़ XP" },
-      { question: "14. सबसे तेज मेमोरी होती है?", options: ["रजिस्टर","रैम","कैश (Cache)","रोम"], answer: "कैश (Cache)" },
-      { question: "15. 5 GB निम्न में से किसके बराबर होगा?", options: ["5120 MB","5120 KB","5120 Byte","5120 TB"], answer: "5120 MB" },
-      { question: "16. निम्न में से कौन सा कंप्यूटर का बुनियादी कार्य नहीं है?", options: ["डाटा को प्रोसेस करना","इनपुट को एक्सेप्ट करना","डाटा को स्कैन करना","डाटा को स्टोर करना"], answer: "डाटा को स्कैन करना" },
-      { question: "17. माउस में राइट बटन का कार्य होता हैं?", options: ["विकल्प का चयन करना","पेज स्क्रॉल करना","विकल्प खोलना","इनमे से कोई नहीं"], answer: "विकल्प का चयन करना" },
-      { question: "18. सबसे शक्तिशाली और मंहगा कंप्यूटर है?", options: ["मिनी कंप्यूटर","मेनफ्रेम कंप्यूटर","माइक्रो कंप्यूटर","सुपर कंप्यूटर"], answer: "सुपर कंप्यूटर" },
-      { question: "19. विंडोज़ में Ctrl+C शॉर्टकट का उपयोग किया जाता है?", options: ["कॉपी करने के लिए","पेस्ट करने के लिए","कट करने के लिए","कंपाइल करने के लिए"], answer: "कॉपी करने के लिए" },
-      { question: "20. डाटा को पर्मानेंट डिलीट करने के लिए निम्न में से किस शॉर्टकट का प्रयोग करते हैं?", options: ["Ctrl+Del","Alt+Del","Shift+Del","Win+Del"], answer: "Shift+Del" },
-      { question: "21. कीबोर्ड में फंगक्शन कुंजी कितनी होती हैं?", options: ["6","8","10","12"], answer: "6" },
-      { question: "22. निम्न में से कौन-सा एक हार्डवेयर है?", options: ["एक्सेल","प्रिन्टर ड्राइवर","आपरेटिंग सिस्टम","कंट्रोल यूनिट"], answer: "कंट्रोल यूनिट" },
-      { question: "23. नोटपैड में बनाई गई फाइल का Extension Name होता है?", options: ["*.jpg","*.txt","*.bmp","*.rtf"], answer: "*.txt" },
-      { question: "24. कट या कॉपी किया गया डाटा निम्न में से किसमे स्टोर रहता है?", options: ["क्लिपबोर्ड","क्लिप डाटा","रोम","हार्डडिस्क"], answer: "क्लिपबोर्ड" },
-      { question: "25. विंडोज़ ऑपरेटिंग सिस्टम को निम्न में से किसने विकसित किया है?", options: ["Intel","Apple","Microsoft","IBM"], answer: "Microsoft" },
-    ];
+<script>
+let selectedQuestions = [];
+let current = 0;
+let answers = {};
+let marked = {};
+let time = 30*60;
+let timerInt;
 
-    let currentQuestion = 0;
-    let answers = {};
+function startQuiz(){
+  // random 25 question
+  selectedQuestions = QUESTION_BANK.sort(()=>0.5-Math.random()).slice(0,25);
+  document.getElementById('quizApp').style.display='flex';
+  buildGrid();
+  showQ();
+  startTimer();
+}
 
-    function loadQuestion() {
-      const q = quizData[currentQuestion];
-      const quizDiv = document.getElementById("quiz");
-      quizDiv.innerHTML = `
-        <div class="question">${q.question}</div>
-        <div class="options">
-          ${q.options.map(opt => `
-            <label>
-              <input type="radio" name="answer" value="${opt}" 
-              ${answers[currentQuestion]===opt?"checked":""}
-              onchange="saveAnswer()">
-              ${opt}
-            </label>
-          `).join("")}
-        </div>
-      `;
-    }
+function startTimer(){
+  timerInt = setInterval(()=>{
+    time--;
+    let m = Math.floor(time/60);
+    let s = time%60;
+    document.getElementById('timer').innerText = `Time: ${m}:${s.toString().padStart(2,'0')}`;
+    if(time<=0){submitQuiz();}
+  },1000);
+}
 
-    function nextQuestion() {
-      saveAnswer();
-      if (currentQuestion < quizData.length - 1) {
-        currentQuestion++;
-        loadQuestion();
-      }
-    }
+function showQ(){
+  let q = selectedQuestions[current];
+  document.getElementById('qnum').innerText = `Question ${current+1} / 25`;
+  document.getElementById('question').innerText = q.q;
+  let optHtml='';
+  q.o.forEach((op,i)=>{
+    optHtml += `<div class="option"><label><input type="radio" name="opt" ${answers[current]==i?'checked':''} onclick="selectAns(${i})"> ${op}</label></div>`;
+  });
+  document.getElementById('options').innerHTML = optHtml;
+  updateGrid();
+}
 
-    function prevQuestion() {
-      saveAnswer();
-      if (currentQuestion > 0) {
-        currentQuestion--;
-        loadQuestion();
-      }
-    }
+function selectAns(i){ answers[current]=i; updateGrid(); }
+function nextQ(){ if(current<24){current++; showQ();} }
+function prevQ(){ if(current>0){current--; showQ();} }
+function markLater(){ marked[current]=true; updateGrid(); }
 
-    function saveAnswer() {
-      const selected = document.querySelector('input[name="answer"]:checked');
-      if (selected) {
-        answers[currentQuestion] = selected.value;
-      }
-      checkIfAllAnswered();
-    }
+function buildGrid(){
+  let g='';
+  for(let i=0;i<25;i++){
+    g+=`<button onclick="jumpQ(${i})" id="g${i}">${i+1}</button>`;
+  }
+  document.getElementById('qGrid').innerHTML=g;
+}
+function jumpQ(i){ current=i; showQ(); }
 
-    function checkIfAllAnswered() {
-      const submitBtn = document.getElementById("submitBtn");
-      if (Object.keys(answers).length === quizData.length) {
-        submitBtn.disabled = false;
-      }
-    }
+function updateGrid(){
+  for(let i=0;i<25;i++){
+    let b=document.getElementById('g'+i);
+    b.className='';
+    if(i===current) b.classList.add('active');
+    if(answers[i]!=null) b.classList.add('answered');
+    if(marked[i]) b.classList.add('marked');
+  }
+}
 
-    function submitQuiz() {
-      saveAnswer();
-      let score = 0;
-      let resultHTML = "<h3>Quiz Results:</h3>";
-      quizData.forEach((q, i) => {
-        let userAns = answers[i] || "Not Answered";
-        if (userAns === q.answer) {
-          score++;
-          resultHTML += `<p><b>Q${i+1}:</b> <span class="correct">Correct ✔ (${userAns})</span></p>`;
-        } else {
-          resultHTML += `<p><b>Q${i+1}:</b> <span class="wrong">Wrong ✘ (Your: ${userAns}, Correct: ${q.answer})</span></p>`;
-        }
-      });
-      resultHTML += `<h3>Your Score: ${score} / ${quizData.length}</h3>`;
-      document.getElementById("result").innerHTML = resultHTML;
-      document.getElementById("result").style.display = "block";
+function submitQuiz(){
+  clearInterval(timerInt);
+  document.getElementById('quizApp').style.display='none';
+  document.getElementById('result').style.display='flex';
+  let score=0;
+  let rev='';
+  selectedQuestions.forEach((q,i)=>{
+    let correct = q.a;
+    let user = answers[i];
+    if(user===correct) score++;
+    rev += `<p><b>Q${i+1}:</b> ${q.q}<br>`;
+    rev += `<span class="${user===correct?'correct':'wrong'}">Your Answer: ${user!=null?q.o[user]:'Not Answered'}</span><br>`;
+    rev += `<span class="correct">Correct Answer: ${q.o[correct]}</span></p>`;
+  });
+  document.getElementById('score').innerText = `Score: ${score} / 25`;
+  document.getElementById('review').innerHTML = rev;
+}
 
-      // Certificate with student name
-      const studentName = document.getElementById("studentNameInput").value || "Student";
-      document.getElementById("certificate").style.display = "block";
-      document.getElementById("cert-name").innerText = studentName;
-      document.getElementById("cert-text").innerText = 
-        `has successfully completed the Fundamentals Quiz and scored ${score} out of ${quizData.length}.`;
-    }
+// auto start
+startQuiz();
+</script>
 
-    loadQuestion();
-  </script>
+<footer>
+  © 2025 Rama Technical Degree College Computer Education | All Rights Reserved<br>
+  Contact: +91-XXXXXXXXXX | Email: info@ramatechnical.edu.in
+</footer>
 </body>
 </html>
-    
