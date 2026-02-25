@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rama Technical Degree College Computer Education - Online Quiz</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#2196f3,#9c27b0);margin:0;animation:bgmove 10s infinite alternate}
+    @keyframes bgmove{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(40deg)}}
+    .header{background:#fff;color:#3f51b5;padding:12px 15px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 10px rgba(0,0,0,.2);animation:slideDown 1s}
+    .header img{height:50px;width:50px;object-fit:contain}
+    .header-title{font-size:24px;font-weight:bold;letter-spacing:1px}
+    @keyframes slideDown{from{transform:translateY(-50px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+    .container{max-width:1100px;margin:20px auto;background:#ffffffdd;padding:20px;border-radius:12px;display:flex;gap:20px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+    .left{flex:3}
+    .right{flex:1;border-left:2px dashed #9c27b0;padding-left:15px}
+
+    h2{margin-top:0;color:#3f51b5}
+    .option{margin:8px 0;padding:6px;border-radius:6px;transition:.3s}
+    .option:hover{background:#e3f2fd}
+
+    button{padding:9px 16px;margin:5px;border:none;border-radius:20px;cursor:pointer;font-weight:bold;transition:.3s}
+    button:hover{transform:scale(1.05)}
+
+    .nav-btn{background:#2196f3;color:#fff}
+    .mark-btn{background:#ff9800;color:#fff}
+    .submit-btn{background:#2e7d32;color:#fff}
+
+    .qbox{margin-bottom:15px;animation:fadeIn .5s}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    .qnum{font-weight:bold;color:#e91e63}
+
+    .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .grid button{padding:8px;font-size:12px;border-radius:50%}
+
+    .active{background:#3f51b5;color:#fff}
+    .answered{background:#4caf50;color:#fff}
+    .marked{background:#ff9800;color:#fff}
+
+    .timer{font-weight:bold;color:#d32f2f;margin-bottom:10px;font-size:18px;animation:pulse 1s infinite alternate}
+    @keyframes pulse{from{transform:scale(1)}to{transform:scale(1.08)}}
+
+    .correct{color:green;font-weight:bold}
+    .wrong{color:red;font-weight:bold}
+
+    footer{background:#1a237e;color:#fff;text-align:center;padding:12px;margin-top:20px;font-size:14px}
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media(max-width:768px){
+      .container{flex-direction:column;padding:15px}
+      .right{border-left:none;border-top:2px dashed #9c27b0;padding-left:0;padding-top:10px}
+      .grid{grid-template-columns:repeat(6,1fr)}
+      .header-title{font-size:18px}
+      .timer{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <img src="RTDC_LOGO.png" alt="Institute Logo">
+  <div class="header-title">Rama Technical Degree College Computer Education</div>
+</div>
+
+<!-- ===== QUESTION BANK (YAHAN 100 QUESTION TYPE KARE) ===== -->
+<script>
+// har question me question, options (4), aur correct index (0-3)
+const QUESTION_BANK = [
+  {q:"Worksheet किनिा समूह होती है ?", o:["Column"," Cells","Box","Formula"], a:1},
+  {q:"Excel में Formula की शुरुआत किस चिन्ह से होती है? Which symbol starts a formula in Excel?", o:[" # "," $ ","= "," @  "], a:2},
+  {q:" Excel में Cells को जोड़ने के लिए कौन सा चिन्ह प्रयोग होता है? Which symbol is used to add cells in Excel?", o:["  – ","* ","+ ","/ "], a:2},
+  {q:"Excel में Column कैसे दिखते है? How are columns labeled in excel ", o:["Numbers ","Letters "," Symbols ","Colors "], a:1},
+  {q:"Excel में Rows कैसे दर्शाई जाती हैं? How are rows represented in Excel?", o:[" Letters ","Colors ","Numbers  ","Symbols "], a:2},
+  {q:"Excel में सबसे अधिक उपयोग होने वाला फ़ंक्शन कौन सा है? Which is the most used function in Excel?", o:["SUM "," PRINT ","BOLDC","OPEND"], a:0},
+  {q:"Excel में सेल का पता कैसे लिखा जाता है? How is a cell address written in Excel?", o:["RowNumber-ColumnLetter ","ColumnLetterRowNumber  ","Only Row ","Only ColumnD"], a:1},
+  {q:" Excel में एक साथ कई शीट्स को क्या कहा जाता है? What is a group of sheets in Excel called?", o:["Folder ","Workbook  ","Cellbook ","Worksheet "], a:1},
+  {q:"Excel में डेटा छांटने के लिए कौन सा विकल्प होता है? Which option is used to sort data in Excel?", o:["Data "," Review ","View ","Page Layout "], a:0},
+  {q:" Excel में Chart Insert करने का विकल्प कहां होता है? Where is the chart insert option found in Excel?", o:["Insert ","View ","Review ","Formula "], a:0},
+  {q:"Excel में एक सेल से दूसरी सेल में जाने के लिए कौन सी कुंजी दबाते हैं? Which key is used to move from one cell to another in Excel?", o:[" Enter "," Space "," Tab C","Esc"], a:0},
+  {q:" Excel में किसी डेटा को कॉपी करने के लिए शॉर्टकट क्या है? What is the shortcut to copy data in Excel?", o:["Ctrl + V","Ctrl + C","Ctrl + X","Ctrl + S"], a:1},
+  {q:"Excel में किसी फाइल को सेव करने के लिए शॉर्टकट क्या है? What is the shortcut to save a file in Excel?", o:["Ctrl + O ","Ctrl + S","Ctrl + P","Ctrl + X"], a:1},
+  {q:"Excel में Sheet का नाम बदलने के लिए क्या किया जाता है? How can you rename a sheet in Excel?", o:["Double Click on Sheet Name ","Click on View","Press F12","Ctrl + R"], a:0},
+  {q:"Excel में एक कॉलम को चुनने के लिए क्या करते हैं? How do you select a column in Excel?", o:["Click on cell","Click on column letter","Right-click anywhere","Press Ctrl"], a:1},
+  {q:"Excel में Formula Bar कहां स्थित होती है? Where is the Formula Bar located in Excel?", o:["नीचे","ऊपर"," दाएं","बाएं"], a:1},
+  {q:"Excel में अधिकतम कॉलम कितने होते हैं (Excel 2016)? What is the maximum number of columns in Excel 2016?", o:["256","1024","16384","1048576"], a:2},
+  {q:"Excel में अधिकतम Rows कितनी होती हैं (Excel 2016)? What is the maximum number of rows in Excel 2016?", o:[" 65536","1048576","32768","16384"], a:1},
+  {q:"Excel में कौन सा चार्ट समय के साथ परिवर्तन दिखाता है? Which chart shows changes over time in Excel?", o:["Bar Chart","Line Chart ","Pie Chart","Column Chart"], a:1},
+  {q:"Excel में AutoSum बटन कहां मिलता है?Where is the AutoSum button found in Excel? ", o:["Insert Tab","Home Tab","Formulas Tab ","View Tab"], a:2},
+   {q:"Excel में Formula Error को किस चिन्ह से दिखाया जाता है? Which symbol indicates a formula error in Excel?", o:["!","@","#","%"], a:2},
+   {q:"किस फंक्शन का उपयोग सबसे बड़ी संख्या निकालने में होता है?Which function is used to find the largest number? ", o:["MIN","MAX","AVG ","SUM"], a:1},
+   {q:"Excel में Cell का Intersection क्या कहलाता है? What is the intersection of a row and a column called?", o:["Table","Field","Cell ","Block"], a:2},
+   {q:" Excel में Wrap Text का उपयोग किस लिए होता है? What is Wrap Text used for in Excel? ", o:["Data delete करने","Data को repeat करने"," Text को लाइन में समेटने ","Text को बड़ा करने"], a:2},
+   {q:"Excel में Merge Cells से क्या होता है? What does Merge Cells do in Excel? ", o:["Text bold करता है","Cells delete करता है ","Cells को एक बनाता है", "Text को italic करता है"], a:2},
+   {q:" Excel में Page Layout का उपयोग किस लिए होता है?What is Page Layout used for in Excel? ", o:["Printing Setup ","Bold Text","Formula जोड़ना ","Cell हटाना"], a:0},
+   {q:"Excel में COUNT() फंक्शन क्या करता है?What does the COUNT() function do? ", o:["Text जोड़ता है","Numbers गिनता है","Date बदलता है ","Date बदलता है"], a:1},
+   {q:"Excel में Filter का प्रयोग किसलिए किया जाता है?What is Filter used for in Excel? ", o:["Graphics लगाने","Data छांटने ","Formatting करने ","Cell जोड़ने"], a:1},
+   {q:"Excel में Conditional Formatting का क्या कार्य है? What does Conditional Formatting do? ", o:["Text italic करता है","Formatting based on condition","Text को हटाता है ","Text bold करता है"], a:1},
+   {q:"Excel में Default File Extension क्या है?What is the default file extension of Excel? ", o:["docx",".xlsx "," .xlsm"," .pptx"], a:1},
+   {q:"Excel में Cell Reference जैसे A1, B2 को क्या कहते हैं?What are A1, B2 types of references called? ", o:[" Text","Formula","Cell Address "," Data"], a:2},
+   {q:"किस Function का प्रयोग औसत निकालने में होता है?Which function is used to calculate average? ", o:["AVG","AVERAGE ","SUM ","COUNT"], a:1}, 
+   {q:"Excel में फॉर्मूला एडिट करने के लिए कौन सी कुंजी प्रयोग होती है?Which key is used to edit a formula in Excel? ", o:["F2 "," F4","F7","F10"], a:0},   
+   {q:"Excel में Cell Freeze करने के लिए किस फीचर का उपयोग होता है?Which feature is used to freeze cells in Excel? ", o:["Freeze Panes ","Lock Cell","Protect Sheet ","View Mode"], a:0}, 
+   {q:"Chart में कौन सा हिस्सा Title दिखाता है?Which chart element shows the title? ", o:["Axis","Data Series","Chart Title ","Gridlines"], a:2}, 
+   {q:"Excel में Undo के लिए शॉर्टकट क्या है?What is the shortcut for Undo in Excel? ", o:["Ctrl + Y","Ctrl + Z ","Ctrl + U"," Ctrl + A"], a:1}, 
+   {q:"Excel में Worksheet को हटाने के लिए क्या करते हैं?How to delete a worksheet in Excel?? ", o:[" Ctrl + D"," Right-click → Delete","File → Close ","Insert → Remove"], a:1}, 
+   {q:" Excel में Function को Insert करने के लिए कौन सी Tab होती है?Which tab is used to insert a function in Excel? ", o:["Home"," Insert","Formulas  ","Review"], a:2}, 
+   {q:"Excel में Pie Chart का उपयोग किस लिए होता है?What is a Pie Chart used for in Excel? ", o:["Data Printing","Percentage Representation "," Time Series","Bar Comparison"], a:1}, 
+   {q:"Excel में किसी Column को छिपाने के लिए क्या करते हैं?How do you hide a column in Excel? ", o:["Delete Column"," Format → Hide","Cut Column ","Filter Column"], a:1}, 
+   {q:"Excel में Cells को एक जैसे बनाने के लिए कौन सा विकल्प होता है?Which option is used to make cells similar in Excel? ", o:["I Group","Format Painter","Paste Special ","AutoFill"], a:1}, 
+   {q:"Excel में Cell में Date कैसे डाली जाती है?How is the date entered in a cell in Excel? ", o:["I=DATE()"," =TIME()","=NOW() ","=TEXT()"], a:0}, 
+   {q:"Excel में Cell Lock करने का क्या उपयोग होता है?What is the use of locking a cell in Excel? ", o:[" Merge Cell","Protect Cell from editing ","Hide Cell","Zoom In"], a:1}, 
+    {q:"Excel में एक Cell में Line Break डालने के लिए किस कुंजी का प्रयोग होता है?Which key is used for line break in a cell? ", o:["Alt + Enter ","Ctrl + Enter","Shift + Enter","Ctrl + Alt"], a:0},  
+    {q:"Excel में कितनी Worksheet एक वर्कबुक में हो सकती है? How many worksheets can a workbook have in Excel? ", o:["255"," 65,536","As many as memory allows ","10 only"], a:2}, 
+    {q:"Excel में Function Wizard को कैसे खोलते हैं? Excel में Function Wizard को कैसे खोलते हैं? ", o:[" Shift + F3 "," Ctrl + F3","Alt + F3","F1"], a:0}, 
+    {q:"Excel में Graphs को क्या कहा जाता है? What are graphs called in Excel? ", o:["Charts","Drawings","Graph Tools ","Visuals"], a:0},       
+    {q:"Excel में सबसे तेज़ी से Formatting कॉपी करने के लिए क्या करें? What is the fastest way to copy formatting in ExcelW? ", o:["Format Painter ","Ctrl + C","Ctrl + V","Paste Special"], a:0}, 
+    {q:"Excel में Form Controls कहां होते हैं?Where are Form Controls found in Excel? ", o:["Developer Tab ","Data Tab","Insert Tab ","View Tab"], a:0}, 
+    {q:"Excel में Goal Seek Tool कहां होता है? Where is Goal Seek found in Excel? ", o:["Insert","View","Data > What-If Analysis","Formula" ], a:2},
+    {q:"Excel में कौन सा Function Current Date देता है? Which function gives the current date in Exce? ", o:["TODAY()","NOW()","DATE()","TIME()"], a:0}, 
+    {q:"Excel में Print Area को कैसे सेट करते हैं? How do you set a print area in Excel? ", o:["File → Print","Page Layout → Print Area ","View → Area ","Format → Page"], a:1}, 
+    {q:"Excel में Cells को Link करने के लिए क्या किया जाता है? How do you link cells in Exce? ", o:["=A1"," #A1","@A1 ","!A1"], a:0}, 
+    {q:"Excel में Autofill किस लिए होता है? What is Autofill used for in Excel? ", o:["Automatically insert data ","Delete data","Hide rows ","Insert images"], a:0}, 
+    {q:"Excel में COUNTIF किस लिए प्रयोग होता है? What is COUNTIF used fo? ", o:["Count with condition ","Count characters","Count dates ","Count errors"], a:0},
+    {q:"Excel में Custom List बनाने का विकल्प कहां होता है? Where is the Custom List option found in Excel? ", o:["File → Options → Advanced","File → Options → General","File → Options → Advanced → Edit Custom List  ","View → Custom"], a:2},
+    {q:"Excel में Cells में केवल संख्याएं भरने के लिए क्या करें? How to restrict cell input to only numbers in Excel? ", o:["Data → Data Validation ","Format → Lock Cell ","Review → Protect Sheet ","Insert → Number"], a:0},
+    {q:"Excel में Name Box क्या दर्शाता है? What does the Name Box show in Excel? ", o:["Sheet Name"," Cell Address ","File Name","Column Name"], a:1},
+    {q:"Excel में Cell Comments को देखने के लिए क्या करें?How to see comments in Excel? ", o:["Hover over the cell "," Click cell twice","Press F4"," Press F2"], a:0},
+    {q:"Excel में कौन सी कुंजी Press करके नई वर्कबुक बनाते हैं? Which key is used to create a new workbook in Excel? ", o:["Ctrl + N","Ctrl + W","Ctrl + A ","Ctrl + S"], a:0},
+    {q:"Excel में AutoSum बटन कहां मिलता है? Where is the AutoSum button found in Excel? ", o:["Insert Tab","Home Tab","Formulas Tab ","View Tab"], a:2},
+    {q:"Excel में AutoSum बटन कहां मिलता है? Where is the AutoSum button found in Excel? ", o:["Insert Tab","Home Tab","Formulas Tab ","View Tab"], a:2},
+  // 👉 isi format me kam se kam 100 question add kare
+];
+</script>
+
+<div class="container" id="quizApp" style="display:none">
+  <div class="left">
+    <div class="timer" id="timer">Time: 30:00</div>
+    <div class="qbox">
+      <div class="qnum" id="qnum"></div>
+      <div id="question"></div>
+      <div id="options"></div>
+    </div>
+    <button class="nav-btn" onclick="prevQ()">Back</button>
+    <button class="nav-btn" onclick="nextQ()">Next</button>
+    <button class="mark-btn" onclick="markLater()">Mark for Later</button>
+    <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+  </div>
+  <div class="right">
+    <h3>Question Status</h3>
+    <div class="grid" id="qGrid"></div>
+  </div>
+</div>
+
+<div class="container" id="result" style="display:none">
+  <div class="left">
+    <h2>Result</h2>
+    <p id="score"></p>
+    <div id="review"></div>
+  </div>
+</div>
+
+<script>
+let selectedQuestions = [];
+let current = 0;
+let answers = {};
+let marked = {};
+let time = 30*60;
+let timerInt;
+
+function startQuiz(){
+  // random 25 question
+  selectedQuestions = QUESTION_BANK.sort(()=>0.5-Math.random()).slice(0,25);
+  document.getElementById('quizApp').style.display='flex';
+  buildGrid();
+  showQ();
+  startTimer();
+}
+
+function startTimer(){
+  timerInt = setInterval(()=>{
+    time--;
+    let m = Math.floor(time/60);
+    let s = time%60;
+    document.getElementById('timer').innerText = `Time: ${m}:${s.toString().padStart(2,'0')}`;
+    if(time<=0){submitQuiz();}
+  },1000);
+}
+
+function showQ(){
+  let q = selectedQuestions[current];
+  document.getElementById('qnum').innerText = `Question ${current+1} / 25`;
+  document.getElementById('question').innerText = q.q;
+  let optHtml='';
+  q.o.forEach((op,i)=>{
+    optHtml += `<div class="option"><label><input type="radio" name="opt" ${answers[current]==i?'checked':''} onclick="selectAns(${i})"> ${op}</label></div>`;
+  });
+  document.getElementById('options').innerHTML = optHtml;
+  updateGrid();
+}
+
+function selectAns(i){ answers[current]=i; updateGrid(); }
+function nextQ(){ if(current<24){current++; showQ();} }
+function prevQ(){ if(current>0){current--; showQ();} }
+function markLater(){ marked[current]=true; updateGrid(); }
+
+function buildGrid(){
+  let g='';
+  for(let i=0;i<25;i++){
+    g+=`<button onclick="jumpQ(${i})" id="g${i}">${i+1}</button>`;
+  }
+  document.getElementById('qGrid').innerHTML=g;
+}
+function jumpQ(i){ current=i; showQ(); }
+
+function updateGrid(){
+  for(let i=0;i<25;i++){
+    let b=document.getElementById('g'+i);
+    b.className='';
+    if(i===current) b.classList.add('active');
+    if(answers[i]!=null) b.classList.add('answered');
+    if(marked[i]) b.classList.add('marked');
+  }
+}
+
+function submitQuiz(){
+  clearInterval(timerInt);
+  document.getElementById('quizApp').style.display='none';
+  document.getElementById('result').style.display='flex';
+  let score=0;
+  let rev='';
+  selectedQuestions.forEach((q,i)=>{
+    let correct = q.a;
+    let user = answers[i];
+    if(user===correct) score++;
+    rev += `<p><b>Q${i+1}:</b> ${q.q}<br>`;
+    rev += `<span class="${user===correct?'correct':'wrong'}">Your Answer: ${user!=null?q.o[user]:'Not Answered'}</span><br>`;
+    rev += `<span class="correct">Correct Answer: ${q.o[correct]}</span></p>`;
+  });
+  document.getElementById('score').innerText = `Score: ${score} / 25`;
+  document.getElementById('review').innerHTML = rev;
+}
+
+// auto start
+startQuiz();
+</script>
+
+<footer>
+  © 2025 Rama Technical Degree College Computer Education | All Rights Reserved<br>
+  Contact: +91-XXXXXXXXXX | Email: info@ramatechnical.edu.in
+</footer>
+</body>
+</html>
